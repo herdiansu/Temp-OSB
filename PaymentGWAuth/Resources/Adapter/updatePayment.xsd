@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="updatePaymentInput" type="updatePaymentInput"/>
+   <xs:complexType name="updatePaymentInput">
+      <xs:sequence>
+         <xs:element name="pStatus" type="xs:string" nillable="true"/>
+         <xs:element name="pDate" type="xs:dateTime" nillable="true"/>
+         <xs:element name="paidAmount" type="xs:decimal" nillable="true"/>
+         <xs:element name="receiptNumber" type="xs:string" nillable="true"/>
+         <xs:element name="stan" type="xs:string" nillable="true"/>
+         <xs:element name="transdate" type="xs:dateTime" nillable="true"/>
+         <xs:element name="caCode" type="xs:string" nillable="true"/>
+         <xs:element name="ciCode" type="xs:string" nillable="true"/>
+         <xs:element name="terimanlId" type="xs:string" nillable="true"/>
+         <xs:element name="updateDate" type="xs:dateTime" nillable="true"/>
+         <xs:element name="sessionId" type="xs:string" nillable="true"/>
+         <xs:element name="payStatus" type="xs:string" nillable="true"/>
+         <xs:element name="cusNum" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

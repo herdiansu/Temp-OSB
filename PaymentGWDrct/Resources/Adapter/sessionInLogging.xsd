@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sessionInLogging" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sessionInLogging" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="sessionInLoggingInput" type="sessionInLoggingInput"/>
+   <xs:complexType name="sessionInLoggingInput">
+      <xs:sequence>
+         <xs:element name="sessionId" type="xs:string" nillable="true"/>
+         <xs:element name="createdDate" type="xs:date" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="sessionInLoggingOutputCollection" type="sessionInLoggingOutputCollection"/>
+   <xs:complexType name="sessionInLoggingOutputCollection">
+      <xs:sequence>
+         <xs:element name="sessionInLoggingOutput" type="sessionInLoggingOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sessionInLoggingOutput">
+      <xs:sequence>
+         <xs:element name="REC_EXISTS" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

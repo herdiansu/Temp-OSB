@@ -1,0 +1,1202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType">
+            <con:wadl ref="PaymentGWAuth/Resources/Definitions/Inquiry"/>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N3f57e002.Nc0416ce.0.177a4011e33.N7f25">
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7d20" name="Get All Header" errorHandler="error-N3f57e002.N170ed044.0.177adc5138f.N79d8">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="token">
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f1a</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='TOKEN']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="caCode">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f19</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='CA_CODE']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="ciCode">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7dc2</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='CI_CODE']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="sessionId">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7dbf</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                        <con3:expr>
+                            <con1:xqueryText>$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='SESSION_ID']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="session">
+                        <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N776a</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                        <con3:expr>
+                            <con1:xqueryText>if(empty($sessionID)) then fn:concat(fn:substring(fn-bea:uuid(), 1, 11), "_OSB")
+else $sessionID/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="session">
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7ff6</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:substring(fn-bea:uuid(), 1, 15)</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7a70</con1:id>
+                        <con3:case id="_BranchId-N3f57e002.N170ed044.0.177adc5138f.N7a6f">
+                            <con3:condition>
+                                <con1:xqueryText>empty($caCode)
+or
+empty($ciCode)
+or 
+$caCode = ''
+or 
+$caCode = ' '
+or 
+$ciCode = ''
+or 
+$ciCode = ' '</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-N3f57e002.Nc0416ce.0.177a4011e33.N7e67</con1:id>
+                                    <con3:errCode>4000003</con3:errCode>
+                                    <con3:message>Field CA_CODE &amp; CI_CODE in Header Parameter is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-N3f57e002.N46c4af89.0.178c47a77f1.N7f18">
+                            <con3:condition>
+                                <con1:xqueryText>empty($token)
+or
+$token = ''
+or
+$token = ' '</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f15</con1:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Token in Header Parameter is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486a0.73c8105d.0.178a5c9474b.N8000" name="Status Services" errorHandler="error-ad486a0.73c8105d.0.178a5c9474b.N7f7c">
+                <con:context>
+                    <con1:userNsDecl prefix="out" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/serviceStatus"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7ffd</con1:id>
+                        <con3:service ref="PaymentGWAuth/BusinessServices/serviceStatus" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>serviceStatus</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpServiceStatus</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outServiceStatus</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpServiceStatus">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7ff9</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>&lt;ser:InputParameters xmlns:ser="http://xmlns.oracle.com/pcbpel/adapter/db/sp/serviceStatus">
+    &lt;ser:P_CA_CODE>{$caCode}&lt;/ser:P_CA_CODE>
+&lt;/ser:InputParameters></con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="out">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7fb7</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>$outServiceStatus/out:PE_OP_CHECK_PAY_AVAIL_F/text()</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:ifThenElse>
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7fef</con1:id>
+                                <con3:case id="_BranchId-ad486a0.73c8105d.0.178a5c9474b.N7fee">
+                                    <con3:condition>
+                                        <con1:xqueryText>$outServiceStatus = 0</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7f7d</con1:id>
+                                            <con3:errCode>6000000</con3:errCode>
+                                            <con3:message>Service Temporary Unavailable</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad48679.N17b1044a.0.177ab3a6729.N7ee3" name="init" errorHandler="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N76c8">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="reqBody">
+                        <con1:id>_ActionId-N3f57e002.Nc0416ce.0.177a4011e33.N7f1f</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$body/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N76fd</con1:id>
+                        <con3:case id="_BranchId-ad486c5.N4ef3ecc9.0.178166ad0b4.N76fc">
+                            <con3:condition>
+                                <con1:xqueryText>empty($reqBody)</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N76fb</con1:id>
+                                    <con3:errCode>4000004</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-ad48693.1cf4784c.0.178edc93b66.N7f27">
+                            <con3:condition>
+                                <con1:xqueryText>$reqBody = '{}' or $reqBody ='{ }'</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-ad48693.1cf4784c.0.178edc93b66.N7ebc</con1:id>
+                                    <con3:errCode>4000004</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:nxsdTranslation>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7d0e</con1:id>
+                        <con3:type>Native-To-XML</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryText>$reqBody</con1:xqueryText>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWAuth/Resources/Schemas/IncomingMessage"/>
+                        <con3:schemaElement xmlns:inc="http://middleware.pgn.co.id/paymentgw/incomingmessage">inc:Root-Element</con3:schemaElement>
+                        <con3:assign-variable>xmlBody</con3:assign-variable>
+                    </con3:nxsdTranslation>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.Nc0416ce.0.177a4011e33.N7f22" name="getKey" errorHandler="error-N3f57e002.N170ed044.0.177adc5138f.N7908">
+                <con:context>
+                    <con1:userNsDecl prefix="sec" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f1f</con1:id>
+                        <con3:service ref="PaymentGWAuth/BusinessServices/secKey" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>secKeySelect</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpSecKey</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outSecKey</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpSecKey">
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f1c</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText><![CDATA[<sec:secKeySelect_ciCode_caCodeInputParameters xmlns:sec="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey">
+    <sec:ciCode>{$ciCode}</sec:ciCode>
+    <sec:caCode>{$caCode}</sec:caCode>
+</sec:secKeySelect_ciCode_caCodeInputParameters>]]></con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7e0a</con1:id>
+                                <con3:case id="_BranchId-N3f57e002.N170ed044.0.177adc5138f.N7e09">
+                                    <con3:condition>
+                                        <con1:xqueryText>empty($outSecKey/sec:Auth/sec:clientname/text())</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7e06</con1:id>
+                                            <con3:errCode>4010003</con3:errCode>
+                                            <con3:message>Client Account (CA/CI) Not Registered</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7adf">
+                                    <con3:condition>
+                                        <con1:xqueryText>not($outSecKey/sec:Auth/sec:status/text() = 'active')</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7aab</con1:id>
+                                            <con3:errCode>4010004</con3:errCode>
+                                            <con3:message>Client Account (CA/CI) Not Active</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:assign varName="keySignature">
+                                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f12</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText>$outSecKey/sec:Auth/sec:seckeySignature/text()</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:assign varName="keyMessage">
+                                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7ede</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText>$outSecKey/sec:Auth/sec:seckeyMessage/text()</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                </con3:default>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.N46c4af89.0.178c47a77f1.N7f6e" name="Authentication" errorHandler="error-N3f57e002.N46c4af89.0.178c47a77f1.N7f67">
+                <con:context/>
+                <con:actions>
+                    <con3:javaCallout varName="tokenCheck">
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f6d</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.JWT</con3:className>
+                        <con3:method>public static java.lang.String validateToken(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText>$token</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText>'dqN5o7mQPE'</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f6c</con1:id>
+                        <con3:case id="_BranchId-N3f57e002.N46c4af89.0.178c47a77f1.N7f6b">
+                            <con3:condition>
+                                <con1:xqueryText>$tokenCheck = "invalid" or $tokenCheck = "Invalid"</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f6a</con1:id>
+                                    <con3:errCode>4010001</con3:errCode>
+                                    <con3:message>Token is Not Authorized</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-N3f57e002.N46c4af89.0.178c47a77f1.N7f69">
+                            <con3:condition>
+                                <con1:xqueryText>$tokenCheck = "expired" or $tokenCheck = "Expired"</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f68</con1:id>
+                                    <con3:errCode>4010002</con3:errCode>
+                                    <con3:message>Token Has Expired</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7d39" name="Decrypt" errorHandler="error-ad486a0.73c8105d.0.178a5c9474b.N7dd6">
+                <con:context>
+                    <con1:userNsDecl prefix="inc" namespace="http://middleware.pgn.co.id/paymentgw/incomingmessage"/>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con2:variable name="NXSDs" path="$decPayload" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                    <con2:variable name="NXSD" path="$xmlBody" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/IncomingMessage" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="encPayload">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7d33</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$xmlBody/inc:payload/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="reqSignature">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7d0b</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>$xmlBody/inc:signature/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7eeb</con1:id>
+                        <con3:case id="_BranchId-ad486ae.N5d2834e1.0.1791c8999f5.N7eea">
+                            <con3:condition>
+                                <con1:xqueryText>empty($encPayload)</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7ee9</con1:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-ad486ae.N5d2834e1.0.1791c8999f5.N7ee8">
+                            <con3:condition>
+                                <con1:xqueryText>empty($reqSignature)</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7ee7</con1:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:javaCallout varName="decPayload">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7d36</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.AES128</con3:className>
+                        <con3:method>public static java.lang.String decrypt(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText>$encPayload</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText>$keyMessage</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:javaCallout varName="osbSignature">
+                        <con1:id>_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7c04</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.HMAC256</con3:className>
+                        <con3:method>public static java.lang.String signature(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText>$decPayload</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText>$keySignature</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:nxsdTranslation>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7c5d</con1:id>
+                        <con3:type>Native-To-XML</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryText>$decPayload</con1:xqueryText>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWAuth/Resources/Schemas/reqInquiry"/>
+                        <con3:schemaElement xmlns:req="http://middleware.pgn.co.id/paymentgw/reqInquiry">req:Root-Element</con3:schemaElement>
+                        <con3:assign-variable>reqPayload</con3:assign-variable>
+                    </con3:nxsdTranslation>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e1a</con1:id>
+                        <con3:case id="_BranchId-ad486a0.73c8105d.0.178a5c9474b.N7e19">
+                            <con3:condition>
+                                <con1:xqueryText>$reqSignature != $osbSignature</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e12</con1:id>
+                                    <con3:errCode>4010005</con3:errCode>
+                                    <con3:message>Invalid Signature</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7dc7" name="Logging Inbound">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con4:route>
+                        <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7e48</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7e45</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'REQUEST-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$decPayload</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486a0.73c8105d.0.178a5c9474b.N7ea3" name="Cek Pelanggan" errorHandler="error-ad486a0.73c8105d.0.178a5c9474b.N7d61">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con1:userNsDecl prefix="out" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer"/>
+                    <con2:variable name="NXSD" path="$reqPayload" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con1:id>_ActionId-N3f57e002.Nc0416ce.0.177a4011e33.N7f12</con1:id>
+                        <con3:case id="_BranchId-N3f57e002.Nc0416ce.0.177a4011e33.N7ed1">
+                            <con3:condition>
+                                <con1:xqueryText>empty($reqPayload/req:custNumber/text())</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id>_ActionId-N3f57e002.Nc0416ce.0.177a4011e33.N7e6c</con1:id>
+                                    <con3:errCode>4000006</con3:errCode>
+                                    <con3:message>Field CUST_NUMBER is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:wsCallout>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e9d</con1:id>
+                        <con3:service ref="PaymentGWAuth/BusinessServices/cekCustomer" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>cekCustomer</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpCekCustomer</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outCekCustomer</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpCekCustomer">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e9a</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>&lt;cek:cekCustomerInput xmlns:cek="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer">
+    &lt;cek:cusNumber>{$reqPayload/req:custNumber/text()}&lt;/cek:cusNumber>
+&lt;/cek:cekCustomerInput></con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="cusName">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e97</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>$outCekCustomer/out:cekCustomerOutput/out:CUST_NAME/text()</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:ifThenElse>
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e90</con1:id>
+                                <con3:case id="_BranchId-ad486a0.73c8105d.0.178a5c9474b.N7e8f">
+                                    <con3:condition>
+                                        <con1:xqueryText>empty($cusName)</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7e55</con1:id>
+                                            <con3:errCode>4020001</con3:errCode>
+                                            <con3:message>Account Not Found</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.Nc0416ce.0.177a4011e33.N7f23" name="Collect Data" errorHandler="error-N3f57e002.N170ed044.0.177adc5138f.N7834">
+                <con:context>
+                    <con1:userNsDecl prefix="get" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice"/>
+                    <con1:userNsDecl prefix="cla" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent"/>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con2:variable name="NXSD" path="$reqPayload" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7ffe</con1:id>
+                        <con3:service ref="PaymentGWAuth/BusinessServices/collectingAgent" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>collectingAgent</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpCollectingAgent</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outCollectingAgent</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpCollectingAgent">
+                                <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7ffb</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/req_CA"/>
+                                        <con1:param name="ciCode">
+                                            <con1:path>$ciCode</con1:path>
+                                        </con1:param>
+                                        <con1:param name="caCode">
+                                            <con1:path>$caCode</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7ff1</con1:id>
+                                <con3:case id="_BranchId-ad48685.782289f4.0.177a67ce03d.N7ff0">
+                                    <con3:condition>
+                                        <con1:xqueryText>empty($outCollectingAgent/cla:collectingAgentOutput/cla:CA_CODE/text())</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7fed</con1:id>
+                                            <con3:errCode>4010000</con3:errCode>
+                                            <con3:message>Unauthorized</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                    <con3:wsCallout>
+                        <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7fe7</con1:id>
+                        <con3:service ref="PaymentGWAuth/BusinessServices/getInvoice" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>getInvoice</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpGetInvoice</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outGetInvoice</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpGetInvoice">
+                                <con1:id>_ActionId-ad48685.782289f4.0.177a67ce03d.N7fe4</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>&lt;get:getInvoiceInput>
+    &lt;get:custNum>{$reqPayload/req:custNumber/text()}&lt;/get:custNum>
+&lt;/get:getInvoiceInput></con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="statuspay">
+                                <con1:id>_ActionId-ad486cd.N26f62009.0.177b42264c0.N7f8f</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryText>$outGetInvoice/get:getInvoiceOutput/get:PAY_STATUS/text()</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:ifThenElse>
+                                <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7ff1</con1:id>
+                                <con3:case id="_BranchId-ad48679.N17b1044a.0.177ab3a6729.N7ff0">
+                                    <con3:condition>
+                                        <con1:xqueryText>empty($outGetInvoice/get:getInvoiceOutput/get:CUST_NUMBER/text())</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7fed</con1:id>
+                                            <con3:errCode>4020002</con3:errCode>
+                                            <con3:message>Bill Not Found</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:case id="_BranchId-ad486cd.N26f62009.0.177b42264c0.N7fcc">
+                                    <con3:condition>
+                                        <con1:xqueryText>($outGetInvoice/get:getInvoiceOutput/get:PAY_STATUS/text()) = '1'</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id>_ActionId-ad486cd.N26f62009.0.177b42264c0.N7f5b</con1:id>
+                                            <con3:errCode>4020003</con3:errCode>
+                                            <con3:message>Bill Already Paid</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:assign varName="respInvoice">
+                                        <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7e3f</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryTransform>
+                                                <con1:resource ref="PaymentGWAuth/Resources/Transformation/resInvoice"/>
+                                                <con1:param name="inp">
+                                                    <con1:path>$outGetInvoice</con1:path>
+                                                </con1:param>
+                                                <con1:param name="sessionId">
+                                                    <con1:path>$session</con1:path>
+                                                </con1:param>
+                                            </con1:xqueryTransform>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:assign varName="invoiceSerialize">
+                                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7fca</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText>fn-bea:serialize($respInvoice)</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:javaCallout varName="translate">
+                                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7fcd</con1:id>
+                                        <con3:archive ref="Commons/Jar/Common"/>
+                                        <con3:className>Utils.XmlToJson</con3:className>
+                                        <con3:method>public static java.lang.String convertXmlToJson(java.lang.String)</con3:method>
+                                        <con3:expr>
+                                            <con1:xqueryText>$invoiceSerialize</con1:xqueryText>
+                                        </con3:expr>
+                                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                                    </con3:javaCallout>
+                                    <con3:assign varName="resultInvoice">
+                                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7fc4</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText>fn:normalize-space(fn:replace($translate, "ns2:", ""))</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                </con3:default>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57e002.Nc0416ce.0.177a4011e33.N7f24">
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7e02" name="Encrypt">
+                <con:context/>
+                <con:actions>
+                    <con3:javaCallout varName="signature">
+                        <con1:id>_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7bcf</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.HMAC256</con3:className>
+                        <con3:method>public static java.lang.String signature(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText>$resultInvoice</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText>$keySignature</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:javaCallout varName="resultPayload">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7dff</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.AES128</con3:className>
+                        <con3:method>public static java.lang.String encrypt(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText>$resultInvoice</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText>$keyMessage</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7e47" name="Logging Outbound">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWAuth/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con4:route>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f59</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7f58</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'RESPONSE-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$resultInvoice</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N7dfe" name="Send">
+                <con:context/>
+                <con:actions>
+                    <con2:transport-headers xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id>_ActionId-ad48679.N17b1044a.0.177ab3a6729.N7fb5</con1:id>
+                        <con2:header-set>inbound-response</con2:header-set>
+                        <con2:header value="expression" name="Access-Control-Allow-Origin">
+                            <con1:xqueryText>"*"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="Access-Control-Allow-Headers">
+                            <con1:xqueryText>"*"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="Content-Type">
+                            <con1:xqueryText>"application/json"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="sessionID">
+                            <con1:xqueryText>$session</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="caCode">
+                            <con1:xqueryText>$caCode</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="channelId">
+                            <con1:xqueryText>$ciCode</con1:xqueryText>
+                        </con2:header>
+                    </con2:transport-headers>
+                    <con3:nxsdTranslation>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7d3a</con1:id>
+                        <con3:type>XML-To-Native</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryTransform>
+                                <con1:resource ref="PaymentGWAuth/Resources/Transformation/sendMessage"/>
+                                <con1:param name="payload">
+                                    <con1:path>$resultPayload</con1:path>
+                                </con1:param>
+                                <con1:param name="signature">
+                                    <con1:path>$signature</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWAuth/Resources/Schemas/sendMessage"/>
+                        <con3:schemaElement xmlns:sen="http://middleware.pgn.co.id/paymentGW/sendinquiry">sen:Root-Element</con3:schemaElement>
+                        <con3:replace-body-content/>
+                    </con3:nxsdTranslation>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57e002.N170ed044.0.177adc5138f.N79d8">
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N79a1" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7ab0</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7ae7</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7ab3</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486cd.N26f62009.0.177b42264c0.N7f55</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57e002.N170ed044.0.177adc5138f.N7908">
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N789a" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7899</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7898</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N7897</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:resume>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N77c2</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                    </con1:resume>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486cd.N26f62009.0.177b42264c0.N7f4d</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57e002.N170ed044.0.177adc5138f.N7834">
+            <con:stage id="_StageId-N3f57e002.N170ed044.0.177adc5138f.N77fa" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N77f9</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N77f8</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N77f7</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:resume>
+                        <con1:id>_ActionId-N3f57e002.N170ed044.0.177adc5138f.N778e</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                    </con1:resume>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486cd.N26f62009.0.177b42264c0.N7f51</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N76c8">
+            <con:stage id="_StageId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7654" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7653</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7652</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7651</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N764f</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486a0.73c8105d.0.178a5c9474b.N7f7c">
+            <con:stage id="_StageId-ad486a0.73c8105d.0.178a5c9474b.N7f0b" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7f0a</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7f09</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7f08</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7f07</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486a0.73c8105d.0.178a5c9474b.N7dd6">
+            <con:stage id="_StageId-ad486a0.73c8105d.0.178a5c9474b.N7d98" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d97</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d96</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d95</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:resume>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d94</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                    </con1:resume>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d93</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486a0.73c8105d.0.178a5c9474b.N7d61">
+            <con:stage id="_StageId-ad486a0.73c8105d.0.178a5c9474b.N7d23" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d22</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d21</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d20</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>'SOA'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>'ERROR-INQUIRY'</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:resume>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d1f</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                    </con1:resume>
+                    <con1:skip>
+                        <con1:id>_ActionId-ad486a0.73c8105d.0.178a5c9474b.N7d1e</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N3f57e002.N46c4af89.0.178c47a77f1.N7f67">
+            <con:stage id="_StageId-N3f57e002.N46c4af89.0.178c47a77f1.N7f66" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f65</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route>
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f64</con1:id>
+                        <con4:service ref="PaymentGWAuth/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f63</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform>
+                                        <con1:resource ref="PaymentGWAuth/Resources/Transformation/logging"/>
+                                        <con1:param name="createBy">
+                                            <con1:path>"SOA"</con1:path>
+                                        </con1:param>
+                                        <con1:param name="createdDate">
+                                            <con1:path>fn:current-date()</con1:path>
+                                        </con1:param>
+                                        <con1:param name="sessionId">
+                                            <con1:path>$session</con1:path>
+                                        </con1:param>
+                                        <con1:param name="category">
+                                            <con1:path>"ERROR-INQUIRY"</con1:path>
+                                        </con1:param>
+                                        <con1:param name="message">
+                                            <con1:path>$faultErrorMessage</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:skip>
+                        <con1:id>_ActionId-N3f57e002.N46c4af89.0.178c47a77f1.N7f62</con1:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-N3f57e002.Nc0416ce.0.177a4011e33.N7f25</con:request>
+                <con:response>response-N3f57e002.Nc0416ce.0.177a4011e33.N7f24</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

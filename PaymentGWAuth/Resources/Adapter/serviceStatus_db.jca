@@ -1,0 +1,12 @@
+<adapter-config name="serviceStatus" adapter="db" wsdlLocation="serviceStatus.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="serviceStatus_ptt" operation="serviceStatus">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="PGNOPEN"/>
+      <property name="ProcedureName" value="PE_OP_CHECK_PAY_AVAIL_F"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

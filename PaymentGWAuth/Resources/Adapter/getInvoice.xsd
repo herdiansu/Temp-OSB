@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="getInvoiceInput" type="getInvoiceInput"/>
+   <xs:complexType name="getInvoiceInput">
+      <xs:sequence>
+         <xs:element name="custNum" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getInvoiceOutputCollection" type="getInvoiceOutputCollection"/>
+   <xs:complexType name="getInvoiceOutputCollection">
+      <xs:sequence>
+         <xs:element name="getInvoiceOutput" type="getInvoiceOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="getInvoiceOutput">
+      <xs:sequence>
+         <xs:element name="CUST_NUMBER" type="xs:string" nillable="true"/>
+         <xs:element name="CUST_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_AMOUNT" type="xs:decimal" nillable="true"/>
+         <xs:element name="CURRENCY" type="xs:string" nillable="true"/>
+         <xs:element name="USAGE" type="xs:decimal" nillable="true"/>
+         <xs:element name="CUST_TYPE" type="xs:string" nillable="true"/>
+         <xs:element name="TOTAL_BILL_PERIOD" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_PERIOD" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_CYCLE" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_REFERENCE" type="xs:string" nillable="true"/>
+         <xs:element name="PAY_STATUS" type="xs:string" nillable="true"/>
+         <xs:element name="STAND_BEGIN" type="xs:decimal" nillable="true"/>
+         <xs:element name="STAND_END" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

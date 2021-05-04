@@ -1,0 +1,11 @@
+<adapter-config name="updatePayment" adapter="db" wsdlLocation="updatePayment.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="updatePayment_ptt" operation="updatePayment">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="update PGN_RW.PE_OP_PAYMENT  set   process_status = #pStatus,  process_date = #pDate,  paid_amount = #paidAmount,  receipt_number = #receiptNumber,  stan = #stan,  trans_date = #transdate,  ca_code = #caCode,  ci_code = #ciCode,  terminal_id = #terimanlId, updated_date = #updateDate, session_id = #sessionId, pay_status = #payStatus where cust_number = #cusNum"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

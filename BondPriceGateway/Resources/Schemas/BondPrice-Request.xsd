@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns="http://www.kpei.co.id/schema/BondPrice.001" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.kpei.co.id/schema/BondPrice.001" elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+  <xs:element name="BondPriceReq">
+    <xs:annotation>
+      <xs:documentation>BondIdxPrice</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="middlewareHeader"/>
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="filter">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="stringList" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="dateTimeEqual" type="xs:dateTime" minOccurs="0"/>
+                    <xs:element name="dateTimeRange" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="start" type="xs:string"/>
+                          <xs:element name="end" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="dateTimeNotEqual" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="stringNotEqual" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="decimalList" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="decimalNotEqual" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="stringEqual" type="xs:string" minOccurs="0"/>
+                    <xs:element name="decimalEqual" type="xs:string" minOccurs="0"/>
+                    <xs:element name="decimalRange" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="start" type="xs:string"/>
+                          <xs:element name="end" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="operand" type="xs:string" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ext" type="expandableVariable"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="expandableVariable">
+    <xs:annotation>
+      <xs:documentation>Array of variable for extending parameters</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="value" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>value of parameter</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="id" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>name of parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="middlewareHeader">
+    <xs:annotation>
+      <xs:documentation>Standard Middleware Header</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="asAt" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>timestamp; ex. 2010-01-01T01:01:01 </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="source" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>source system; ex. Datafeed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>id for distinguish between message; can be sequence or filename_yyyymmddh24miss</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

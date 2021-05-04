@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType">
+            <con:wadl ref="PaymentGWDrct/Resources/Definitions/GetPayment"/>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-ad486ee.N4df85541.0.178102904df.N792b" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N792a" name="Get All Header" errorHandler="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b6a">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="caCode">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7929</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='CA_CODE']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="ciCode">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7928</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='CI_CODE']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="session">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7927</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/tp:user-header[@name='SESSION_ID']/@value</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="session">
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b53</con5:id>
+                        <con5:disabled xmlns:con5="http://www.bea.com/wli/sb/stages/config">true</con5:disabled>
+                        <con3:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">if(empty($sessionID)) then fn:concat(fn:substring(fn-bea:uuid(), 1, 11), "_OSB")
+else $sessionID/text()</con5:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b59</con5:id>
+                        <con3:case id="_BranchId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79b5">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($caCode)
+or
+empty($ciCode)
+or 
+$caCode = ''
+or 
+$caCode = ' '
+or 
+$ciCode = ''
+or 
+$ciCode = ' '</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7924</con1:id>
+                                    <con3:errCode>4000003</con3:errCode>
+                                    <con3:message>Field CA_CODE &amp; CI_CODE in Header Parameter is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7f52">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($session)
+or 
+$session = ''
+or 
+$session = ' '</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7eed</con5:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Token in Header Parameter is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad4867f.N4047a7fe.0.178afb18be5.N7e58" name="Status Services" errorHandler="error-ad4867f.N4047a7fe.0.178afb18be5.N7e51">
+                <con:context>
+                    <con1:userNsDecl prefix="out" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/serviceStatus" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e57</con5:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/serviceStatus" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>serviceStatus</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpServiceStatus</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outServiceStatus</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpServiceStatus">
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e56</con5:id>
+                                <con3:expr>
+                                    <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">&lt;ser:InputParameters xmlns:ser="http://xmlns.oracle.com/pcbpel/adapter/db/sp/serviceStatus">
+    &lt;ser:P_CA_CODE>{$caCode}&lt;/ser:P_CA_CODE>
+&lt;/ser:InputParameters></con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="out">
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e55</con5:id>
+                                <con3:expr>
+                                    <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outServiceStatus/out:PE_OP_CHECK_PAY_AVAIL_F/text()</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:ifThenElse>
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e54</con5:id>
+                                <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7e53">
+                                    <con3:condition>
+                                        <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outServiceStatus = 0</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e52</con5:id>
+                                            <con3:errCode>6000000</con3:errCode>
+                                            <con3:message>Service Temporary Unavailable</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N791c" name="init" errorHandler="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N7844">
+                <con:context>
+                    <con5:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="reqBody">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N791b</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$body/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7947</con5:id>
+                        <con3:case id="_BranchId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7946">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($reqBody)</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7943</con5:id>
+                                    <con3:errCode>4000004</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-ad48693.1cf4784c.0.178edc93b66.N7fc9">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$reqBody = '{}' or $reqBody ='{ }'</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad48693.1cf4784c.0.178edc93b66.N7f91</con5:id>
+                                    <con3:errCode>4000004</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:nxsdTranslation>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N791a</con1:id>
+                        <con3:type>Native-To-XML</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$reqBody</con1:xqueryText>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWDrct/Resources/Schemas/IncomingMessage"/>
+                        <con3:schemaElement xmlns:inc="http://middleware.pgn.co.id/paymentgw/incomingmessage">inc:Root-Element</con3:schemaElement>
+                        <con3:assign-variable>xmlBody</con3:assign-variable>
+                    </con3:nxsdTranslation>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N7919" name="getKey" errorHandler="error-ad486ee.N4df85541.0.178102904df.N7911">
+                <con:context>
+                    <con1:userNsDecl prefix="sec" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7918</con1:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/secKey" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>secKeySelect</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpSecKey</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outSecKey</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpSecKey">
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7917</con1:id>
+                                <con3:expr>
+                                    <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<sec:secKeySelect_ciCode_caCodeInputParameters xmlns:sec="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey">
+    <sec:ciCode>{$ciCode}</sec:ciCode>
+    <sec:caCode>{$caCode}</sec:caCode>
+</sec:secKeySelect_ciCode_caCodeInputParameters>]]></con5:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7916</con1:id>
+                                <con3:case id="_BranchId-ad486ee.N4df85541.0.178102904df.N7915">
+                                    <con3:condition>
+                                        <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($outSecKey/sec:Auth/sec:clientname/text())</con5:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7914</con1:id>
+                                            <con3:errCode>4010003</con3:errCode>
+                                            <con3:message>Client Account (CA/CI) Not Registered</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:case id="_BranchId-ad4867e.acbbe13.0.1790e63ec8b.N7fc9">
+                                    <con3:condition>
+                                        <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">not($outSecKey/sec:Auth/sec:status/text() = 'active')</con5:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867e.acbbe13.0.1790e63ec8b.N7fc7</con5:id>
+                                            <con3:errCode>4010004</con3:errCode>
+                                            <con3:message>Client Account (CA/CI) Not Active</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:assign varName="keySignature">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7913</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outSecKey/sec:Auth/sec:seckeySignature/text()</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:assign varName="keyMessage">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7912</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outSecKey/sec:Auth/sec:seckeyMessage/text()</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                </con3:default>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N790a" name="Decrypt" errorHandler="error-ad4867f.N4047a7fe.0.178afb18be5.N7d66">
+                <con:context>
+                    <con5:userNsDecl prefix="inc" namespace="http://middleware.pgn.co.id/paymentgw/incomingmessage" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSDs" path="$decPayload" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                    <con2:variable name="NXSD" path="$xmlBody" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/IncomingMessage" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:assign varName="encPayload">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7909</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$xmlBody/inc:payload/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:assign varName="reqSignature">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7908</con1:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$xmlBody/inc:signature/text()</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con3:ifThenElse>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7db2</con5:id>
+                        <con3:case id="_BranchId-ad486ae.N5d2834e1.0.1791c8999f5.N7db1">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($encPayload)</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7db0</con5:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:case id="_BranchId-ad486ae.N5d2834e1.0.1791c8999f5.N7daf">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($reqSignature)</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ae.N5d2834e1.0.1791c8999f5.N7dae</con5:id>
+                                    <con3:errCode>4000002</con3:errCode>
+                                    <con3:message>Body Message is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:javaCallout varName="decPayload">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7907</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.AES128</con3:className>
+                        <con3:method>public static java.lang.String decrypt(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$encPayload</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$keyMessage</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:javaCallout varName="osbSignature">
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e0e</con5:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.HMAC256</con3:className>
+                        <con3:method>public static java.lang.String signature(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$decPayload</con5:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$keySignature</con5:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:nxsdTranslation>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7906</con1:id>
+                        <con3:type>Native-To-XML</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$decPayload</con1:xqueryText>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWDrct/Resources/Schemas/reqInquiry"/>
+                        <con3:schemaElement xmlns:req="http://middleware.pgn.co.id/paymentgw/reqInquiry">req:Root-Element</con3:schemaElement>
+                        <con3:assign-variable>reqPayload</con3:assign-variable>
+                    </con3:nxsdTranslation>
+                    <con3:ifThenElse>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7da1</con5:id>
+                        <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7da0">
+                            <con3:condition>
+                                <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$reqSignature != $osbSignature</con1:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7d9f</con5:id>
+                                    <con3:errCode>4010005</con3:errCode>
+                                    <con3:message>Invalid Signature</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N7905" name="Logging Inbound">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con4:route xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7904</con1:id>
+                        <con5:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:operation>dbLogging</con5:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N7903</con1:id>
+                                <con3:expr>
+                                    <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                        <con6:resource ref="PaymentGWDrct/Resources/Transformation/logging"/>
+                                        <con6:param name="createBy">
+                                            <con6:path>'SOA'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="createdDate">
+                                            <con6:path>fn:current-date()</con6:path>
+                                        </con6:param>
+                                        <con6:param name="sessionId">
+                                            <con6:path>$session</con6:path>
+                                        </con6:param>
+                                        <con6:param name="category">
+                                            <con6:path>'REQUEST-GETPAYMENT'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="message">
+                                            <con6:path>$decPayload</con6:path>
+                                        </con6:param>
+                                    </con6:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad4867f.N4047a7fe.0.178afb18be5.N7c4f" name="Cek Pelanggan" errorHandler="error-ad4867f.N4047a7fe.0.178afb18be5.N7c45">
+                <con:context>
+                    <con5:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="out" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSD" path="$reqPayload" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:ifThenElse>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c4e</con5:id>
+                        <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7c4d">
+                            <con3:condition>
+                                <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($reqPayload/req:custNumber/text())</con5:xqueryText>
+                            </con3:condition>
+                            <con3:actions>
+                                <con3:Error>
+                                    <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c4c</con5:id>
+                                    <con3:errCode>4000006</con3:errCode>
+                                    <con3:message>Field CUST_NUMBER is Mandatory</con3:message>
+                                </con3:Error>
+                            </con3:actions>
+                        </con3:case>
+                        <con3:default/>
+                    </con3:ifThenElse>
+                    <con3:wsCallout>
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c4b</con5:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/cekCustomer" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>cekCustomer</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpCekCustomer</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outCekCustomer</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpCekCustomer">
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c4a</con5:id>
+                                <con3:expr>
+                                    <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">&lt;cek:cekCustomerInput xmlns:cek="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer">
+    &lt;cek:cusNumber>{$reqPayload/req:custNumber/text()}&lt;/cek:cusNumber>
+&lt;/cek:cekCustomerInput></con5:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:assign varName="cusName">
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c49</con5:id>
+                                <con3:expr>
+                                    <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outCekCustomer/out:cekCustomerOutput/out:CUST_NAME/text()</con1:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                            <con3:ifThenElse>
+                                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c48</con5:id>
+                                <con3:case id="_BranchId-ad4867f.N4047a7fe.0.178afb18be5.N7c47">
+                                    <con3:condition>
+                                        <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($cusName)</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c46</con5:id>
+                                            <con3:errCode>4020001</con3:errCode>
+                                            <con3:message>Account Not Found</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N7902" name="Proccess Data" errorHandler="error-ad486ee.N4df85541.0.178102904df.N78f2">
+                <con:context>
+                    <con5:userNsDecl prefix="get" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="upd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="cla" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="sel" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con5:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSD" path="$reqPayload" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con3:wsCallout>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78fe</con1:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/collectingAgent" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>collectingAgent</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpCollectingAgent</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outCollectingAgent</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpCollectingAgent">
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78fd</con1:id>
+                                <con3:expr>
+                                    <con1:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                                        <con1:resource ref="PaymentGWDrct/Resources/Transformation/req_CA"/>
+                                        <con1:param name="ciCode">
+                                            <con1:path>$ciCode</con1:path>
+                                        </con1:param>
+                                        <con1:param name="caCode">
+                                            <con1:path>$caCode</con1:path>
+                                        </con1:param>
+                                    </con1:xqueryTransform>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78fc</con1:id>
+                                <con3:case id="_BranchId-ad486ee.N4df85541.0.178102904df.N78fb">
+                                    <con3:condition>
+                                        <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($outCollectingAgent/cla:collectingAgentOutput/cla:CA_CODE/text())</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78fa</con1:id>
+                                            <con3:errCode>4010000</con3:errCode>
+                                            <con3:message>Unauthorized</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default/>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                    <con3:wsCallout>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78f9</con1:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/selectPayment" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>selectPayment</con3:operation>
+                        <con3:request>
+                            <con3:body wrapped="false">inpSelectPayment</con3:body>
+                        </con3:request>
+                        <con3:response>
+                            <con3:body wrapped="false">outSelectPayment</con3:body>
+                        </con3:response>
+                        <con3:requestTransform>
+                            <con3:assign varName="inpSelectPayment">
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78f8</con1:id>
+                                <con3:expr>
+                                    <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">&lt;sel:selectPaymentInput>
+    &lt;sel:cusNumber>{$reqPayload/req:custNumber/text()}&lt;/sel:cusNumber>
+&lt;/sel:selectPaymentInput></con5:xqueryText>
+                                </con3:expr>
+                            </con3:assign>
+                        </con3:requestTransform>
+                        <con3:responseTransform>
+                            <con3:ifThenElse>
+                                <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78f7</con1:id>
+                                <con3:case id="_BranchId-ad486ee.N4df85541.0.178102904df.N78f6">
+                                    <con3:condition>
+                                        <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">empty($outSelectPayment/sel:selectPaymentOutput/sel:CUST_NUMBER/text())</con1:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78f5</con1:id>
+                                            <con3:errCode>4020002</con3:errCode>
+                                            <con3:message>Bill Not Found</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:case id="_BranchId-ad486dc.N1b78d2c9.0.178cee03bd5.N7bbc">
+                                    <con3:condition>
+                                        <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$outSelectPayment/sel:selectPaymentOutput/sel:SESSION_ID/text() != $session</con5:xqueryText>
+                                    </con3:condition>
+                                    <con3:actions>
+                                        <con3:Error>
+                                            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486dc.N1b78d2c9.0.178cee03bd5.N7b88</con5:id>
+                                            <con3:errCode>4020005</con3:errCode>
+                                            <con3:message>Session Not Match</con3:message>
+                                        </con3:Error>
+                                    </con3:actions>
+                                </con3:case>
+                                <con3:default>
+                                    <con3:assign varName="respPayment">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e8</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                                                <con1:resource ref="PaymentGWDrct/Resources/Transformation/resPayment"/>
+                                                <con1:param name="inp">
+                                                    <con1:path>$outSelectPayment</con1:path>
+                                                </con1:param>
+                                            </con1:xqueryTransform>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:assign varName="paymentSerialize">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e7</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:replace(fn-bea:serialize($respPayment), "N/A", "")</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:javaCallout varName="translate">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e6</con1:id>
+                                        <con3:archive ref="Commons/Jar/Common"/>
+                                        <con3:className>Utils.XmlToJson</con3:className>
+                                        <con3:method>public static java.lang.String convertXmlToJson(java.lang.String)</con3:method>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$paymentSerialize</con1:xqueryText>
+                                        </con3:expr>
+                                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                                    </con3:javaCallout>
+                                    <con3:assign varName="restructure">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N74f4</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:replace(fn:replace($translate, '\}\}','}'), '\{"ns2:response": ', "")</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                    <con3:assign varName="resultGetPayment">
+                                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e4</con1:id>
+                                        <con3:expr>
+                                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:normalize-space(fn:replace($restructure, "ns2:", ""))</con1:xqueryText>
+                                        </con3:expr>
+                                    </con3:assign>
+                                </con3:default>
+                            </con3:ifThenElse>
+                        </con3:responseTransform>
+                    </con3:wsCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486ee.N4df85541.0.178102904df.N7911" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7a5c" name="Error Handler" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="faultErrorMessage" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7a5b</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:route>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7a5a</con2:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>dbLogging</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7a59</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con2:param name="createBy">
+                                            <con2:path>'SOA'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="createdDate">
+                                            <con2:path>fn:current-date()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sessionId">
+                                            <con2:path>$session</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'ERROR-GETPAYMENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="message">
+                                            <con2:path>$faultErrorMessage</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:skip>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7a58</con2:id>
+                    </con2:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486ee.N4df85541.0.178102904df.N78f2" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79bb" name="Error Handler" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="faultErrorMessage" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79ba</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:route>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79b9</con2:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>dbLogging</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79b8</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con2:param name="createBy">
+                                            <con2:path>'SOA'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="createdDate">
+                                            <con2:path>fn:current-date()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sessionId">
+                                            <con2:path>$session</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'ERROR-GETPAYMENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="message">
+                                            <con2:path>$faultErrorMessage</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:skip>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N79b7</con2:id>
+                    </con2:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-ad486ee.N4df85541.0.178102904df.N78e3" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N78e2" name="Encrypt">
+                <con:context/>
+                <con:actions>
+                    <con3:javaCallout varName="signature">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e1</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.HMAC256</con3:className>
+                        <con3:method>public static java.lang.String signature(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$resultGetPayment</con5:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$keySignature</con5:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                    <con3:javaCallout varName="resultPayload">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78e0</con1:id>
+                        <con3:archive ref="Commons/Jar/Common"/>
+                        <con3:className>Encryption.AES128</con3:className>
+                        <con3:method>public static java.lang.String encrypt(java.lang.String, java.lang.String)</con3:method>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$resultGetPayment</con1:xqueryText>
+                        </con3:expr>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$keyMessage</con1:xqueryText>
+                        </con3:expr>
+                        <con3:return-param-as-ref>false</con3:return-param-as-ref>
+                    </con3:javaCallout>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N78df" name="Logging Outbound">
+                <con:context>
+                    <con1:userNsDecl prefix="req" namespace="http://middleware.pgn.co.id/paymentgw/reqInquiry" xmlns:con5="http://www.bea.com/wli/sb/stages/config"/>
+                    <con2:variable name="NXSD" path="$reqXML" asChild="false">
+                        <con2:schema ref="PaymentGWDrct/Resources/Schemas/reqInquiry" element="Root-Element"/>
+                    </con2:variable>
+                </con:context>
+                <con:actions>
+                    <con4:route xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78de</con1:id>
+                        <con5:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:operation>dbLogging</con5:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con1:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78dd</con1:id>
+                                <con3:expr>
+                                    <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                        <con6:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con6:param name="createBy">
+                                            <con6:path>"SOA"</con6:path>
+                                        </con6:param>
+                                        <con6:param name="createdDate">
+                                            <con6:path>fn:current-date()</con6:path>
+                                        </con6:param>
+                                        <con6:param name="sessionId">
+                                            <con6:path>$session</con6:path>
+                                        </con6:param>
+                                        <con6:param name="category">
+                                            <con6:path>"RESPONSE-GETPAYMENT"</con6:path>
+                                        </con6:param>
+                                        <con6:param name="message">
+                                            <con6:path>$resultGetPayment</con6:path>
+                                        </con6:param>
+                                    </con6:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-ad486ee.N4df85541.0.178102904df.N78dc" name="Send">
+                <con:context/>
+                <con:actions>
+                    <con2:transport-headers xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78db</con1:id>
+                        <con2:header-set>inbound-response</con2:header-set>
+                        <con2:header value="expression" name="Access-Control-Allow-Origin">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">"*"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="Access-Control-Allow-Headers">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">"*"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="Content-Type">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">"application/json"</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="sessionID">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$sessionId</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="caCode">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$caCode</con1:xqueryText>
+                        </con2:header>
+                        <con2:header value="expression" name="channelId">
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$ciCode</con1:xqueryText>
+                        </con2:header>
+                    </con2:transport-headers>
+                    <con3:nxsdTranslation>
+                        <con1:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad486ee.N4df85541.0.178102904df.N78da</con1:id>
+                        <con3:type>XML-To-Native</con3:type>
+                        <con3:sourceExpr>
+                            <con1:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                                <con1:resource ref="PaymentGWDrct/Resources/Transformation/sendMessage"/>
+                                <con1:param name="payload">
+                                    <con1:path>$resultPayload</con1:path>
+                                </con1:param>
+                                <con1:param name="signature">
+                                    <con1:path>$signature</con1:path>
+                                </con1:param>
+                            </con1:xqueryTransform>
+                        </con3:sourceExpr>
+                        <con3:nxsd ref="PaymentGWDrct/Resources/Schemas/sendMessage"/>
+                        <con3:schemaElement xmlns:sen="http://middleware.pgn.co.id/paymentGW/sendinquiry">sen:Root-Element</con3:schemaElement>
+                        <con3:replace-body-content/>
+                    </con3:nxsdTranslation>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b6a">
+            <con:stage id="_StageId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b69" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="faultErrorMessage">
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b66</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:route>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b63</con2:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>dbLogging</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7b60</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con2:param name="createBy">
+                                            <con2:path>'SOA'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="createdDate">
+                                            <con2:path>fn:current-date()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sessionId">
+                                            <con2:path>$session</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'ERROR-GETPAYMENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="message">
+                                            <con2:path>$faultErrorMessage</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:skip>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N7ad5</con2:id>
+                    </con2:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad486c5.N4ef3ecc9.0.178166ad0b4.N7844">
+            <con:stage id="_StageId-ad486c5.N4ef3ecc9.0.178166ad0b4.N77a2" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="faultErrorMessage">
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N77a1</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:route>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N77a0</con2:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>dbLogging</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true">
+                                <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N779f</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con2:param name="createBy">
+                                            <con2:path>'SOA'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="createdDate">
+                                            <con2:path>fn:current-date()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sessionId">
+                                            <con2:path>$session</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'ERROR-GETPAYMENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="message">
+                                            <con2:path>$faultErrorMessage</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:skip>
+                        <con2:id>_ActionId-ad486c5.N4ef3ecc9.0.178166ad0b4.N779e</con2:id>
+                    </con2:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad4867f.N4047a7fe.0.178afb18be5.N7e51" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad4867f.N4047a7fe.0.178afb18be5.N7e50" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e4f</con5:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e4e</con6:id>
+                        <con4:service ref="PaymentGWDrct/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e4d</con6:id>
+                                <con3:expr>
+                                    <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                        <con6:resource ref="PaymentGWDrct/Resources/Transformation/logging"/>
+                                        <con6:param name="createBy">
+                                            <con6:path>'SOA'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="createdDate">
+                                            <con6:path>fn:current-date()</con6:path>
+                                        </con6:param>
+                                        <con6:param name="sessionId">
+                                            <con6:path>$session</con6:path>
+                                        </con6:param>
+                                        <con6:param name="category">
+                                            <con6:path>'ERROR-GETPAYMENT'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="message">
+                                            <con6:path>$faultErrorMessage</con6:path>
+                                        </con6:param>
+                                    </con6:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:skip xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                        <con5:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7e4c</con5:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad4867f.N4047a7fe.0.178afb18be5.N7d66">
+            <con:stage id="_StageId-ad4867f.N4047a7fe.0.178afb18be5.N7cf9" name="Error Handler" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="faultErrorMessage" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7cf8</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:route>
+                        <con2:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7cf7</con2:id>
+                        <con3:service ref="PaymentGWDrct/BusinessServices/dbLogging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>dbLogging</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con2:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7cf6</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="PaymentGWDrct/Resources/Transformation/dbLogging"/>
+                                        <con2:param name="createBy">
+                                            <con2:path>'SOA'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="createdDate">
+                                            <con2:path>fn:current-date()</con2:path>
+                                        </con2:param>
+                                        <con2:param name="sessionId">
+                                            <con2:path>$session</con2:path>
+                                        </con2:param>
+                                        <con2:param name="category">
+                                            <con2:path>'ERROR-GETPAYMENT'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="message">
+                                            <con2:path>$faultErrorMessage</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                    <con2:skip>
+                        <con2:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7cf5</con2:id>
+                    </con2:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-ad4867f.N4047a7fe.0.178afb18be5.N7c45" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+            <con:stage id="_StageId-ad4867f.N4047a7fe.0.178afb18be5.N7c44" name="Error Handler">
+                <con:context/>
+                <con:actions>
+                    <con3:assign varName="faultErrorMessage">
+                        <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c43</con5:id>
+                        <con3:expr>
+                            <con1:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">fn:concat("Error Code: ", $fault/ctx:errorCode/text(), " | ", "Error Message :", $fault/ctx:reason/text())</con1:xqueryText>
+                        </con3:expr>
+                    </con3:assign>
+                    <con4:route xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c42</con6:id>
+                        <con4:service ref="PaymentGWDrct/BusinessServices/Logging" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:operation>Logging</con4:operation>
+                        <con4:outboundTransform>
+                            <con3:replace varName="body" contents-only="true">
+                                <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c41</con6:id>
+                                <con3:expr>
+                                    <con6:xqueryTransform xmlns:con6="http://www.bea.com/wli/sb/stages/config">
+                                        <con6:resource ref="PaymentGWDrct/Resources/Transformation/logging"/>
+                                        <con6:param name="createBy">
+                                            <con6:path>'SOA'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="createdDate">
+                                            <con6:path>fn:current-date()</con6:path>
+                                        </con6:param>
+                                        <con6:param name="sessionId">
+                                            <con6:path>$session</con6:path>
+                                        </con6:param>
+                                        <con6:param name="category">
+                                            <con6:path>'ERROR-GETPAYMENT'</con6:path>
+                                        </con6:param>
+                                        <con6:param name="message">
+                                            <con6:path>$faultErrorMessage</con6:path>
+                                        </con6:param>
+                                    </con6:xqueryTransform>
+                                </con3:expr>
+                            </con3:replace>
+                        </con4:outboundTransform>
+                    </con4:route>
+                    <con1:resume xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                        <con5:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c40</con5:id>
+                        <con1:disabled>true</con1:disabled>
+                    </con1:resume>
+                    <con1:skip xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                        <con5:id>_ActionId-ad4867f.N4047a7fe.0.178afb18be5.N7c3f</con5:id>
+                    </con1:skip>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node2" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/typesystem/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con:request>request-ad486ee.N4df85541.0.178102904df.N792b</con:request>
+                <con:response>response-ad486ee.N4df85541.0.178102904df.N78e3</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema elementFormDefault="qualified" nxsd:encoding="US-ASCII" nxsd:version="JSON" targetNamespace="http://middleware.pgn.co.id/paymentgw/reqPayment" xmlns="http://middleware.pgn.co.id/paymentgw/reqPayment" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Root-Element">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="custNumber" type="xsd:string"/>
+				<xsd:element name="custName" type="xsd:string"/>
+				<xsd:element name="billAmount" type="xsd:decimal"/>
+				<xsd:element name="currency" type="xsd:string"/>
+				<xsd:element name="usage" type="xsd:decimal"/>
+				<xsd:element name="custType" type="xsd:string"/>
+				<xsd:element name="totalBillPeriod" type="xsd:string"/>
+				<xsd:element name="billPeriod" type="xsd:string"/>
+				<xsd:element name="billCycle" type="xsd:string"/>
+				<xsd:element name="billReference" type="xsd:string"/>
+				<xsd:element name="processStatus" type="xsd:string"/>
+				<xsd:element name="processDate" type="xsd:date"/>
+				<xsd:element name="paidAmount" type="xsd:decimal"/>
+				<xsd:element name="receiptNumber" type="xsd:string"/>
+				<xsd:element name="stan" type="xsd:string"/>
+				<xsd:element name="transDate" type="xsd:date"/>
+				<xsd:element name="caCode" type="xsd:string"/>
+				<xsd:element name="ciCode" type="xsd:string"/>
+				<xsd:element name="terminalId" type="xsd:string"/>
+				<xsd:element name="updatedDate" type="xsd:date"/>
+				<xsd:element name="standBegin" type="xsd:decimal"/>
+				<xsd:element name="standEnd" type="xsd:decimal"/>
+				<xsd:element name="gopMasterId" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:annotation xmlns="">
+		<xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+		<xsd:appinfo>USEHEADER=false</xsd:appinfo>
+	</xsd:annotation>
+</xsd:schema>

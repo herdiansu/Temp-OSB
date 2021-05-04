@@ -1,0 +1,14 @@
+<adapter-config name="secKey" adapter="db" wsdlLocation="secKey.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="pgnmid_ds" location="eis/DB/pgnmid_ds"/>
+  <endpoint-interaction portType="secKey_ptt" operation="secKeySelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="secKey.Auth"/>
+      <property name="QueryName" value="secKeySelect"/>
+      <property name="MappingsMetaDataURL" value="secKey-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/sessionInLogging" name="sessionInLogging-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="sessionInLogging.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/sessionInLogging"/>
+    <wsdl:binding name="sessionInLogging_ptt-binding" type="ses:sessionInLogging_ptt" xmlns:ses="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/sessionInLogging">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="sessionInLogging">
+            <soap:operation soapAction="sessionInLogging"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,11 @@
+<adapter-config name="collectingAgent" adapter="db" wsdlLocation="collectingAgent.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="collectingAgent_ptt" operation="collectingAgent">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select * from PGN_RW.PE_OP_CA_CI_V where ca_code = #caCode and ci_code = #ciCode"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

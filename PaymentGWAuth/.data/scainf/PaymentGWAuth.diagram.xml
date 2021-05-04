@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="GetPayment">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="778" width="137" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="771" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="GetPayment" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="7" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gService>
+    <dgm:gService name="Inquiry">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="1023" width="137" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="1016" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="Inquiry" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="7" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gService>
+    <dgm:gService name="Payment">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="213" width="137" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="206" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="Payment" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="7" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gService>
+    <dgm:gService name="ReversePayment">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="508" width="137" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="501" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="ReversePayment" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="7" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gService>
+    <dgm:gReference name="serviceStatus">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="543" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="536" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="serviceStatus" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="Logging">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="668" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="661" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="Logging" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="dbLogging">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="1029" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="1022" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="dbLogging" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="secKey">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="765" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="758" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="secKey" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="cekCustomer">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="853" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="846" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="cekCustomer" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="selectPayment">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="457" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="450" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="selectPayment" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="collectingAgent">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="943" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="936" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="collectingAgent" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="getInvoice">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="1117" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="1110" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="getInvoice" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="updateInvoice">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="198" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="191" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="updateInvoice" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="updatePayment">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="323" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="316" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="updatePayment" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="sessionInLogging">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="26" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="19" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="sessionInLogging" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="sessionInLogging2">
+        <dgm:body borderWidth="2" arcRad="20" X="1330" Y="112" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="1320" Y="105" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="sessionInLogging2" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gComponent name="GetPayment2">
+        <dgm:body borderWidth="2" arcRad="20" X="712" Y="763" width="130" height="211">
+            <dgm:borderColor r="109" g="136" b="65"/>
+            <dgm:lightBgColor r="201" g="224" b="155"/>
+            <dgm:darkBgColor r="157" g="195" b="93"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="702" Y="756" width="150" height="227">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="__service__" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.serviceStatus" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.Logging" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.dbLogging" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.secKey" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.cekCustomer" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.selectPayment" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.collectingAgent" X="120" Y="165" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/sb/tooling/ide/sca/internal/icons/icon_pipeline_20x20.gif" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="Inquiry2">
+        <dgm:body borderWidth="2" arcRad="20" X="712" Y="1008" width="130" height="186">
+            <dgm:borderColor r="109" g="136" b="65"/>
+            <dgm:lightBgColor r="201" g="224" b="155"/>
+            <dgm:darkBgColor r="157" g="195" b="93"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="702" Y="1001" width="150" height="202">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="__service__" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.serviceStatus" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.getInvoice" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.Logging" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.secKey" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.cekCustomer" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.collectingAgent" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/sb/tooling/ide/sca/internal/icons/icon_pipeline_20x20.gif" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="Payment2">
+        <dgm:body borderWidth="2" arcRad="20" X="712" Y="198" width="130" height="261">
+            <dgm:borderColor r="109" g="136" b="65"/>
+            <dgm:lightBgColor r="201" g="224" b="155"/>
+            <dgm:darkBgColor r="157" g="195" b="93"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="702" Y="191" width="150" height="277">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="__service__" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.updateInvoice" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.updatePayment" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.serviceStatus" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.Logging" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.sessionInLogging" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.secKey" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.cekCustomer" X="120" Y="165" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.selectPayment" X="120" Y="190" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.collectingAgent" X="120" Y="215" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/sb/tooling/ide/sca/internal/icons/icon_pipeline_20x20.gif" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="ReversePayment2">
+        <dgm:body borderWidth="2" arcRad="20" X="712" Y="493" width="130" height="236">
+            <dgm:borderColor r="109" g="136" b="65"/>
+            <dgm:lightBgColor r="201" g="224" b="155"/>
+            <dgm:darkBgColor r="157" g="195" b="93"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="702" Y="486" width="150" height="252">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="__service__" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.updateInvoice" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.updatePayment" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.serviceStatus" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.Logging" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.secKey" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.cekCustomer" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.selectPayment" X="120" Y="165" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:outputPort name="businessservice.1141199407.collectingAgent" X="120" Y="190" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="SB Interface" callbackInterface="SB Interface"/>
+        <dgm:nodeIcon URI="/oracle/sb/tooling/ide/sca/internal/icons/icon_pipeline_20x20.gif" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="GetPayment" target="GetPayment2/__service__" width="2">
+        <dgm:gSegment X1="168" Y1="788" X2="702" Y2="788"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry" target="Inquiry2/__service__" width="2">
+        <dgm:gSegment X1="168" Y1="1033" X2="702" Y2="1033"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment" target="Payment2/__service__" width="2">
+        <dgm:gSegment X1="168" Y1="223" X2="702" Y2="223"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment" target="ReversePayment2/__service__" width="2">
+        <dgm:gSegment X1="168" Y1="518" X2="702" Y2="518"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.serviceStatus" target="serviceStatus" width="2">
+        <dgm:gSegment X1="852" Y1="788" X2="966" Y2="788"/>
+        <dgm:gSegment X1="966" Y1="788" X2="966" Y2="553"/>
+        <dgm:gSegment X1="966" Y1="553" X2="1320" Y2="553"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.Logging" target="Logging" width="2">
+        <dgm:gSegment X1="852" Y1="813" X2="981" Y2="813"/>
+        <dgm:gSegment X1="981" Y1="813" X2="981" Y2="678"/>
+        <dgm:gSegment X1="981" Y1="678" X2="1320" Y2="678"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.dbLogging" target="dbLogging" width="2">
+        <dgm:gSegment X1="852" Y1="838" X2="1131" Y2="838"/>
+        <dgm:gSegment X1="1131" Y1="838" X2="1131" Y2="1039"/>
+        <dgm:gSegment X1="1131" Y1="1039" X2="1320" Y2="1039"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.secKey" target="secKey" width="2">
+        <dgm:gSegment X1="852" Y1="863" X2="996" Y2="863"/>
+        <dgm:gSegment X1="996" Y1="863" X2="996" Y2="775"/>
+        <dgm:gSegment X1="996" Y1="775" X2="1320" Y2="775"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.cekCustomer" target="cekCustomer" width="2">
+        <dgm:gSegment X1="852" Y1="888" X2="1011" Y2="888"/>
+        <dgm:gSegment X1="1011" Y1="888" X2="1011" Y2="863"/>
+        <dgm:gSegment X1="1011" Y1="863" X2="1320" Y2="863"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.selectPayment" target="selectPayment" width="2">
+        <dgm:gSegment X1="852" Y1="913" X2="1026" Y2="913"/>
+        <dgm:gSegment X1="1026" Y1="913" X2="1026" Y2="467"/>
+        <dgm:gSegment X1="1026" Y1="467" X2="1320" Y2="467"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GetPayment2/businessservice.1141199407.collectingAgent" target="collectingAgent" width="2">
+        <dgm:gSegment X1="852" Y1="938" X2="1116" Y2="938"/>
+        <dgm:gSegment X1="1116" Y1="938" X2="1116" Y2="953"/>
+        <dgm:gSegment X1="1116" Y1="953" X2="1320" Y2="953"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.serviceStatus" target="serviceStatus" width="2">
+        <dgm:gSegment X1="852" Y1="1033" X2="1041" Y2="1033"/>
+        <dgm:gSegment X1="1041" Y1="1033" X2="1041" Y2="553"/>
+        <dgm:gSegment X1="1041" Y1="553" X2="1320" Y2="553"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.getInvoice" target="getInvoice" width="2">
+        <dgm:gSegment X1="852" Y1="1058" X2="1116" Y2="1058"/>
+        <dgm:gSegment X1="1116" Y1="1058" X2="1116" Y2="1127"/>
+        <dgm:gSegment X1="1116" Y1="1127" X2="1320" Y2="1127"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.Logging" target="Logging" width="2">
+        <dgm:gSegment X1="852" Y1="1083" X2="1056" Y2="1083"/>
+        <dgm:gSegment X1="1056" Y1="1083" X2="1056" Y2="678"/>
+        <dgm:gSegment X1="1056" Y1="678" X2="1320" Y2="678"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.secKey" target="secKey" width="2">
+        <dgm:gSegment X1="852" Y1="1108" X2="1071" Y2="1108"/>
+        <dgm:gSegment X1="1071" Y1="1108" X2="1071" Y2="775"/>
+        <dgm:gSegment X1="1071" Y1="775" X2="1320" Y2="775"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.cekCustomer" target="cekCustomer" width="2">
+        <dgm:gSegment X1="852" Y1="1133" X2="1086" Y2="1133"/>
+        <dgm:gSegment X1="1086" Y1="1133" X2="1086" Y2="863"/>
+        <dgm:gSegment X1="1086" Y1="863" X2="1320" Y2="863"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Inquiry2/businessservice.1141199407.collectingAgent" target="collectingAgent" width="2">
+        <dgm:gSegment X1="852" Y1="1158" X2="1101" Y2="1158"/>
+        <dgm:gSegment X1="1101" Y1="1158" X2="1101" Y2="953"/>
+        <dgm:gSegment X1="1101" Y1="953" X2="1320" Y2="953"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.updateInvoice" target="updateInvoice" width="2">
+        <dgm:gSegment X1="852" Y1="223" X2="876" Y2="223"/>
+        <dgm:gSegment X1="876" Y1="223" X2="876" Y2="208"/>
+        <dgm:gSegment X1="876" Y1="208" X2="1320" Y2="208"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.updatePayment" target="updatePayment" width="2">
+        <dgm:gSegment X1="852" Y1="248" X2="1296" Y2="248"/>
+        <dgm:gSegment X1="1296" Y1="248" X2="1296" Y2="333"/>
+        <dgm:gSegment X1="1296" Y1="333" X2="1320" Y2="333"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.serviceStatus" target="serviceStatus" width="2">
+        <dgm:gSegment X1="852" Y1="273" X2="1281" Y2="273"/>
+        <dgm:gSegment X1="1281" Y1="273" X2="1281" Y2="553"/>
+        <dgm:gSegment X1="1281" Y1="553" X2="1320" Y2="553"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.Logging" target="Logging" width="2">
+        <dgm:gSegment X1="852" Y1="298" X2="1266" Y2="298"/>
+        <dgm:gSegment X1="1266" Y1="298" X2="1266" Y2="678"/>
+        <dgm:gSegment X1="1266" Y1="678" X2="1320" Y2="678"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.sessionInLogging" target="sessionInLogging" width="2">
+        <dgm:gSegment X1="852" Y1="323" X2="891" Y2="323"/>
+        <dgm:gSegment X1="891" Y1="323" X2="891" Y2="36"/>
+        <dgm:gSegment X1="891" Y1="36" X2="1320" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.secKey" target="secKey" width="2">
+        <dgm:gSegment X1="852" Y1="348" X2="1251" Y2="348"/>
+        <dgm:gSegment X1="1251" Y1="348" X2="1251" Y2="775"/>
+        <dgm:gSegment X1="1251" Y1="775" X2="1320" Y2="775"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.cekCustomer" target="cekCustomer" width="2">
+        <dgm:gSegment X1="852" Y1="373" X2="1236" Y2="373"/>
+        <dgm:gSegment X1="1236" Y1="373" X2="1236" Y2="863"/>
+        <dgm:gSegment X1="1236" Y1="863" X2="1320" Y2="863"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.selectPayment" target="selectPayment" width="2">
+        <dgm:gSegment X1="852" Y1="398" X2="1221" Y2="398"/>
+        <dgm:gSegment X1="1221" Y1="398" X2="1221" Y2="467"/>
+        <dgm:gSegment X1="1221" Y1="467" X2="1320" Y2="467"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Payment2/businessservice.1141199407.collectingAgent" target="collectingAgent" width="2">
+        <dgm:gSegment X1="852" Y1="423" X2="1206" Y2="423"/>
+        <dgm:gSegment X1="1206" Y1="423" X2="1206" Y2="953"/>
+        <dgm:gSegment X1="1206" Y1="953" X2="1320" Y2="953"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.updateInvoice" target="updateInvoice" width="2">
+        <dgm:gSegment X1="852" Y1="518" X2="906" Y2="518"/>
+        <dgm:gSegment X1="906" Y1="518" X2="906" Y2="208"/>
+        <dgm:gSegment X1="906" Y1="208" X2="1320" Y2="208"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.updatePayment" target="updatePayment" width="2">
+        <dgm:gSegment X1="852" Y1="543" X2="921" Y2="543"/>
+        <dgm:gSegment X1="921" Y1="543" X2="921" Y2="333"/>
+        <dgm:gSegment X1="921" Y1="333" X2="1320" Y2="333"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.serviceStatus" target="serviceStatus" width="2">
+        <dgm:gSegment X1="852" Y1="568" X2="936" Y2="568"/>
+        <dgm:gSegment X1="936" Y1="568" X2="936" Y2="553"/>
+        <dgm:gSegment X1="936" Y1="553" X2="1320" Y2="553"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.Logging" target="Logging" width="2">
+        <dgm:gSegment X1="852" Y1="593" X2="1191" Y2="593"/>
+        <dgm:gSegment X1="1191" Y1="593" X2="1191" Y2="678"/>
+        <dgm:gSegment X1="1191" Y1="678" X2="1320" Y2="678"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.secKey" target="secKey" width="2">
+        <dgm:gSegment X1="852" Y1="618" X2="1176" Y2="618"/>
+        <dgm:gSegment X1="1176" Y1="618" X2="1176" Y2="775"/>
+        <dgm:gSegment X1="1176" Y1="775" X2="1320" Y2="775"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.cekCustomer" target="cekCustomer" width="2">
+        <dgm:gSegment X1="852" Y1="643" X2="1161" Y2="643"/>
+        <dgm:gSegment X1="1161" Y1="643" X2="1161" Y2="863"/>
+        <dgm:gSegment X1="1161" Y1="863" X2="1320" Y2="863"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.selectPayment" target="selectPayment" width="2">
+        <dgm:gSegment X1="852" Y1="668" X2="951" Y2="668"/>
+        <dgm:gSegment X1="951" Y1="668" X2="951" Y2="467"/>
+        <dgm:gSegment X1="951" Y1="467" X2="1320" Y2="467"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ReversePayment2/businessservice.1141199407.collectingAgent" target="collectingAgent" width="2">
+        <dgm:gSegment X1="852" Y1="693" X2="1146" Y2="693"/>
+        <dgm:gSegment X1="1146" Y1="693" X2="1146" Y2="953"/>
+        <dgm:gSegment X1="1146" Y1="953" X2="1320" Y2="953"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://middleware.pgn.co.id/paymentgw/inquiry"
+            targetNamespace="http://middleware.pgn.co.id/paymentgw/inquiry" elementFormDefault="qualified">
+  <xsd:element name="HeaderInquiry" type="header">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="RequestInquiry" type="request"/>
+  <xsd:element name="ResponseInquiry" type="response"/>
+  <xsd:complexType name="request">
+    <xsd:sequence>
+      <xsd:element name="noPelanggan" type="xsd:string"/>
+      <xsd:element name="caCode" type="xsd:string"/>
+      <xsd:element name="channelId" type="xsd:string"/>
+      <xsd:element name="timeRequest" type="xsd:dateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="response">
+    <xsd:sequence>
+      <xsd:element name="responseCode" type="xsd:string"/>
+      <xsd:element name="responseMessage" type="xsd:string"/>
+      <xsd:element name="data" type="data"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="data">
+    <xsd:sequence>
+      <xsd:element name="noPelanggan" type="xsd:string"/>
+      <xsd:element name="namaPelanggan" type="xsd:string"/>
+      <xsd:element name="nilaiTagihan" type="xsd:string"/>
+      <xsd:element name="mataUang" type="xsd:string"/>
+      <xsd:element name="volumePemakaian" type="xsd:string"/>
+      <xsd:element name="jenisPelanggan" type="xsd:string"/>
+      <xsd:element name="jumlahBulanTagihan" type="xsd:string"/>
+      <xsd:element name="bulanTagihan" type="xsd:string"/>
+      <xsd:element name="billingCycle" type="xsd:string"/>
+      <xsd:element name="billReference" type="xsd:string"/>
+      <xsd:element name="standAwal" type="xsd:string"/>
+      <xsd:element name="standAkhir" type="xsd:string"/>
+      <xsd:element name="caCode" type="xsd:string"/>
+      <xsd:element name="channelId" type="xsd:string"/>
+      <xsd:element name="timeRequest"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="header">
+    <xsd:sequence>
+      <xsd:element name="authorization" type="xsd:string"/>
+      <xsd:element name="timeStamp" type="xsd:string"/>
+      <xsd:element name="partnerId" type="xsd:string"/>
+      <xsd:element name="sessionId" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

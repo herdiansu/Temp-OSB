@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://sampleBondPrice"
+            targetNamespace="http://sampleBondPrice" elementFormDefault="qualified">
+  <xsd:element name="RequestMessage" type="requestData">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ResponseMessage" type="responseData"/>
+  <xsd:complexType name="requestData">
+    <xsd:sequence>
+      <xsd:element name="filter">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="stringList" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dateTimeEqual" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="dateTimeRange" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="start" type="xsd:string"/>
+                          <xsd:element name="end" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dateTimeNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="stringNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="decimalList" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="decimalNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="stringEqual" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="decimalEqual" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="decimalRange" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="start" type="xsd:string"/>
+                          <xsd:element name="end" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="operand" type="xsd:string" minOccurs="0"/>
+                  </xsd:sequence>
+                  <xsd:attribute name="id" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="responseData">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="1" name="PriceId" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="PriceDateIBPA" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="BondCode" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="PriceSource" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Yield" type="xsd:decimal" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Price" type="xsd:decimal" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Time" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="BondType" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="LowPrice" type="xsd:decimal" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="HighPrice" type="xsd:decimal" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

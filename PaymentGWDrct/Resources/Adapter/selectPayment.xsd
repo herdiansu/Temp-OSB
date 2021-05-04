@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="selectPaymentInput" type="selectPaymentInput"/>
+   <xs:complexType name="selectPaymentInput">
+      <xs:sequence>
+         <xs:element name="cusNumber" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="selectPaymentOutputCollection" type="selectPaymentOutputCollection"/>
+   <xs:complexType name="selectPaymentOutputCollection">
+      <xs:sequence>
+         <xs:element name="selectPaymentOutput" type="selectPaymentOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="selectPaymentOutput">
+      <xs:sequence>
+         <xs:element name="CUST_NUMBER" type="xs:string" nillable="true"/>
+         <xs:element name="CUST_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_AMOUNT" type="xs:decimal" nillable="true"/>
+         <xs:element name="CURRENCY" type="xs:string" nillable="true"/>
+         <xs:element name="USAGE" type="xs:decimal" nillable="true"/>
+         <xs:element name="CUST_TYPE" type="xs:string" nillable="true"/>
+         <xs:element name="TOTAL_BILL_PERIOD" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_PERIOD" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_CYCLE" type="xs:string" nillable="true"/>
+         <xs:element name="BILL_REFERENCE" type="xs:string" nillable="true"/>
+         <xs:element name="PAY_STATUS" type="xs:string" nillable="true"/>
+         <xs:element name="PROCESS_STATUS" type="xs:string" nillable="true"/>
+         <xs:element name="PROCESS_DATE" type="xs:date" nillable="true"/>
+         <xs:element name="PAID_AMOUNT" type="xs:decimal" nillable="true"/>
+         <xs:element name="RECEIPT_NUMBER" type="xs:string" nillable="true"/>
+         <xs:element name="STAN" type="xs:string" nillable="true"/>
+         <xs:element name="TRANS_DATE" type="xs:date" nillable="true"/>
+         <xs:element name="CA_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="CI_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="TERMINAL_ID" type="xs:string" nillable="true"/>
+         <xs:element name="UPDATED_DATE" type="xs:date" nillable="true"/>
+         <xs:element name="STAND_BEGIN" type="xs:decimal" nillable="true"/>
+         <xs:element name="STAND_END" type="xs:decimal" nillable="true"/>
+         <xs:element name="GOP_MASTER_ID" type="xs:string" nillable="true"/>
+         <xs:element name="SESSION_ID" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

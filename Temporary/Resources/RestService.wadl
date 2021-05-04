@@ -1,0 +1,200 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://kpei.co.id/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="RestService">RestService</doc>
+   <grammars>
+      <s:schema elementFormDefault="qualified" targetNamespace="http://kpei.co.id/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://kpei.co.id/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <s:element name="BondPriceReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="header" type="tns:Header"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="body" type="tns:ArrayOfFilterItem"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="ext" type="tns:ArrayOfExtensionValue"/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Header">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="asAt" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string"/>
+        </s:sequence>
+        <s:attribute name="id" type="s:string"/>
+      </s:complexType>
+      <s:complexType name="ArrayOfFilterItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="filter" type="tns:FilterItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FilterItem">
+        <s:sequence>
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="stringList" type="tns:StringList"/>
+            <s:element minOccurs="1" maxOccurs="1" name="dateTimeEqual" type="s:dateTime"/>
+            <s:element minOccurs="0" maxOccurs="1" name="dateTimeRange" type="tns:DateTimeRange"/>
+            <s:element minOccurs="0" maxOccurs="1" name="dateTimeNotEqual" type="tns:DateTimeList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stringNotEqual" type="tns:StringList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="decimalList" type="tns:DecimalList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="decimalNotEqual" type="tns:DecimalList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="stringEqual" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="decimalEqual" type="s:decimal"/>
+            <s:element minOccurs="0" maxOccurs="1" name="decimalRange" type="tns:DecimalRange"/>
+            <s:element minOccurs="0" maxOccurs="1" name="operand" type="s:string"/>
+          </s:choice>
+        </s:sequence>
+        <s:attribute name="id" type="s:string"/>
+      </s:complexType>
+      <s:complexType name="StringList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="value" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DateTimeRange">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="start" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="end" type="s:dateTime"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DateTimeList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="value" type="s:dateTime"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DecimalList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="value" type="s:decimal"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DecimalRange">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="start" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="end" type="s:decimal"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfExtensionValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="value">
+            <s:complexType>
+              <s:simpleContent>
+                <s:extension base="s:string">
+                  <s:attribute name="id" type="s:string"/>
+                </s:extension>
+              </s:simpleContent>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BondPriceReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BondPriceReqResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="header" type="tns:Header"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="body" type="tns:ArrayOfBondPriceItem"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="ext" type="tns:ArrayOfExtensionValue"/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBondPriceItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BondPriceItem" type="tns:BondPriceItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BondPriceItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PriceId" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="PriceDateIBPA" type="s:date"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BondCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PriceSource" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Yield" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BondType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="LowPrice" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HighPrice" type="s:decimal"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BondIDXPriceReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="header" type="tns:Header"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="body" type="tns:ArrayOfFilterItem"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="ext" type="tns:ArrayOfExtensionValue"/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BondIDXPriceReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BondIDXPriceReqResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="header" type="tns:Header"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="body" type="tns:ArrayOfBondPriceItemIDX"/>
+                  <s:element minOccurs="0" maxOccurs="1" name="ext" type="tns:ArrayOfExtensionValue"/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBondPriceItemIDX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BondPriceItemIDX" type="tns:BondPriceItemIDX"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BondPriceItemIDX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PriceId" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="PriceDate" type="s:date"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BondCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PriceSource" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Yield" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BondType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="LowPrice" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HighPrice" type="s:decimal"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+   </grammars>
+   <resources>
+      <resource path="/BondPriceReq">
+         <method name="POST" soa:wsdlOperation="BondPriceReq">
+            <request>
+               <representation mediaType="application/json" element="cns:BondPriceReq" xmlns:cns="http://kpei.co.id/"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:BondPriceReqResponse" xmlns:cns="http://kpei.co.id/"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/BondIDXPriceReq">
+         <method name="POST" soa:wsdlOperation="BondIDXPriceReq">
+            <request>
+               <representation mediaType="application/xml" element="cns:BondIDXPriceReq" xmlns:cns="http://kpei.co.id/"/>
+               <representation mediaType="application/json" element="cns:BondIDXPriceReq" xmlns:cns="http://kpei.co.id/"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:BondIDXPriceReqResponse" xmlns:cns="http://kpei.co.id/"/>
+               <representation mediaType="application/json" element="cns:BondIDXPriceReqResponse" xmlns:cns="http://kpei.co.id/"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

@@ -1,0 +1,11 @@
+<adapter-config name="Logging" adapter="db" wsdlLocation="Logging.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="Logging_ptt" operation="Logging">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="INSERT INTO PGN_RW.PE_OP_TRANSACTION_LOG (CREATED_DATE, CREATED_BY, CATEGORY, MESSAGE, SESSION_ID) VALUES (#cDate, #cBy, #category, #message, #sessionId)"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="cekCustomerInput" type="cekCustomerInput"/>
+   <xs:complexType name="cekCustomerInput">
+      <xs:sequence>
+         <xs:element name="cusNumber" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="cekCustomerOutputCollection" type="cekCustomerOutputCollection"/>
+   <xs:complexType name="cekCustomerOutputCollection">
+      <xs:sequence>
+         <xs:element name="cekCustomerOutput" type="cekCustomerOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="cekCustomerOutput">
+      <xs:sequence>
+         <xs:element name="CUST_NUMBER" type="xs:string" nillable="true"/>
+         <xs:element name="AREA_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="CUST_NAME" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

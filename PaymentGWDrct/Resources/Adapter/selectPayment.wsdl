@@ -1,0 +1,56 @@
+<wsdl:definitions
+     name="selectPayment"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWDrct/selectPayment"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWDrct/selectPayment"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="selectPayment_plt" >
+    <plt:role name="selectPayment_role" >
+      <plt:portType name="tns:selectPayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+  <plt:partnerLinkType name="selectPayment_plt" >
+    <plt:role name="selectPayment_role" >
+      <plt:portType name="tns:selectPayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+  <plt:partnerLinkType name="selectPayment_plt" >
+    <plt:role name="selectPayment_role" >
+      <plt:portType name="tns:selectPayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+  <plt:partnerLinkType name="selectPayment_plt" >
+    <plt:role name="selectPayment_role" >
+      <plt:portType name="tns:selectPayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" schemaLocation="selectPayment.xsd" />
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" schemaLocation="selectPayment.xsd" />
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" schemaLocation="selectPayment.xsd" />
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectPayment" schemaLocation="selectPayment.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="selectPaymentInput_msg">
+        <wsdl:part name="selectPaymentInput_msg" element="db:selectPaymentInput"/>
+    </wsdl:message>
+    <wsdl:message name="selectPaymentOutputCollection_msg">
+        <wsdl:part name="selectPaymentOutputCollection" element="db:selectPaymentOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="selectPayment_ptt">
+        <wsdl:operation name="selectPayment">
+            <wsdl:input message="tns:selectPaymentInput_msg"/>
+            <wsdl:output message="tns:selectPaymentOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/updateInvoice" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/updateInvoice" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="updateInvoiceInput" type="updateInvoiceInput"/>
+   <xs:complexType name="updateInvoiceInput">
+      <xs:sequence>
+         <xs:element name="payStatus" type="xs:string" nillable="true"/>
+         <xs:element name="custNumber" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

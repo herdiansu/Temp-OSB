@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/ServiceName" targetNamespace="http://TargetNamespace.com/ServiceName" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="Root-Element">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="getInvoiceOutputCollection">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="getInvoiceOutput">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="CUST_NUMBER" type="xsd:integer"/>
+                              <xsd:element name="CUST_NAME" type="xsd:string"/>
+                              <xsd:element name="BILL_AMOUNT" type="xsd:integer"/>
+                              <xsd:element name="CURRENCY" type="xsd:string"/>
+                              <xsd:element name="USAGE" type="xsd:integer"/>
+                              <xsd:element name="CUST_TYPE" type="xsd:string"/>
+                              <xsd:element name="TOTAL_BILL_PERIOD" type="xsd:integer"/>
+                              <xsd:element name="BILL_PERIOD" type="xsd:string"/>
+                              <xsd:element name="BILL_CYCLE" type="xsd:integer"/>
+                              <xsd:element name="BILL_REFERENCE" type="xsd:string"/>
+                              <xsd:element name="STAND_BEGIN" type="xsd:integer"/>
+                              <xsd:element name="STAND_END" type="xsd:integer"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

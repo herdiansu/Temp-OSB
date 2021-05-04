@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://common.middleware.com"
+            targetNamespace="http://common.middleware.com" elementFormDefault="qualified">
+  <xsd:element name="requestMessage">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="clientId" type="xsd:string"/>
+        <xsd:element name="clientAgent" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="responseMessage">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="token" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,24 @@
+<wsdl:definitions name="collectingAgent" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWDrct/collectingAgent" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWDrct/collectingAgent" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="collectingAgent_plt">
+    <plt:role name="collectingAgent_role">
+      <plt:portType name="tns:collectingAgent_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent" schemaLocation="collectingAgent.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="collectingAgentInput_msg">
+        <wsdl:part name="collectingAgentInput_msg" element="db:collectingAgentInput"/>
+    </wsdl:message>
+    <wsdl:message name="collectingAgentOutputCollection_msg">
+        <wsdl:part name="collectingAgentOutputCollection" element="db:collectingAgentOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="collectingAgent_ptt">
+        <wsdl:operation name="collectingAgent">
+            <wsdl:input message="tns:collectingAgentInput_msg"/>
+            <wsdl:output message="tns:collectingAgentOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

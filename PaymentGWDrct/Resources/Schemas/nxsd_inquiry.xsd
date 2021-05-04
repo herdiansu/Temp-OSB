@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://middleware.pgn.co.id/paymentgw/inquiry" targetNamespace="http://middleware.pgn.co.id/paymentgw/inquiry" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="Root-Element">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="Header">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="authorization" type="xsd:string"/>
+                     <xsd:element name="timeStamp" type="xsd:string"/>
+                     <xsd:element name="partnerId" type="xsd:string"/>
+                     <xsd:element name="sessionId" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Body">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="noPelanggan" type="xsd:string"/>
+                     <xsd:element name="caCode" type="xsd:string"/>
+                     <xsd:element name="channelId" type="xsd:string"/>
+                     <xsd:element name="timeRequest" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

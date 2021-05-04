@@ -1,0 +1,20 @@
+<wsdl:definitions name="Logging" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/Logging" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/Logging" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/Logging" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="Logging_plt">
+    <plt:role name="Logging_role">
+      <plt:portType name="tns:Logging_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Logging" schemaLocation="Logging.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="LoggingInput_msg">
+        <wsdl:part name="LoggingInput_msg" element="db:LoggingInput"/>
+    </wsdl:message>
+    <wsdl:portType name="Logging_ptt">
+        <wsdl:operation name="Logging">
+            <wsdl:input message="tns:LoggingInput_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

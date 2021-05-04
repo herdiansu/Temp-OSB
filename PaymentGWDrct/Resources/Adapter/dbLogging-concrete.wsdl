@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/dbLogging" name="dbLogging-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="dbLogging.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/dbLogging"/>
+    <wsdl:binding name="dbLogging_ptt-binding" type="dbl:dbLogging_ptt" xmlns:dbl="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/dbLogging">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="dbLogging">
+            <soap:operation soapAction="dbLogging"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

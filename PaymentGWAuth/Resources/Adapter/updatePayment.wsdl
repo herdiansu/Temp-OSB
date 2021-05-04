@@ -1,0 +1,36 @@
+<wsdl:definitions
+     name="updatePayment"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/updatePayment"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/updatePayment"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="updatePayment_plt" >
+    <plt:role name="updatePayment_role" >
+      <plt:portType name="tns:updatePayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+  <plt:partnerLinkType name="updatePayment_plt" >
+    <plt:role name="updatePayment_role" >
+      <plt:portType name="tns:updatePayment_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment" schemaLocation="updatePayment.xsd" />
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/updatePayment" schemaLocation="updatePayment.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="updatePaymentInput_msg">
+        <wsdl:part name="updatePaymentInput_msg" element="db:updatePaymentInput"/>
+    </wsdl:message>
+    <wsdl:portType name="updatePayment_ptt">
+        <wsdl:operation name="updatePayment">
+            <wsdl:input message="tns:updatePaymentInput_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

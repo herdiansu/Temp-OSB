@@ -1,0 +1,11 @@
+<adapter-config name="sessionInLogging" adapter="db" wsdlLocation="sessionInLogging.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="sessionInLogging_ptt" operation="sessionInLogging">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select case when exists (select 1 from PGN_RW.PE_OP_TRANSACTION_LOG where SESSION_ID = #sessionId and TO_DATE(created_date) = #createdDate and category LIKE '%INQUIRY' ) then 'Y' else 'N' end as rec_exists from dual"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

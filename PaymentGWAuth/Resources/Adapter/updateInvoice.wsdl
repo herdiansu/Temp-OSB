@@ -1,0 +1,20 @@
+<wsdl:definitions name="updateInvoice" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWAuth/updateInvoice" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWAuth/updateInvoice" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/updateInvoice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="updateInvoice_plt">
+    <plt:role name="updateInvoice_role">
+      <plt:portType name="tns:updateInvoice_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/updateInvoice" schemaLocation="updateInvoice.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="updateInvoiceInput_msg">
+        <wsdl:part name="updateInvoiceInput_msg" element="db:updateInvoiceInput"/>
+    </wsdl:message>
+    <wsdl:portType name="updateInvoice_ptt">
+        <wsdl:operation name="updateInvoice">
+            <wsdl:input message="tns:updateInvoiceInput_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

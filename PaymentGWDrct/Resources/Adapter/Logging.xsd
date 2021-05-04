@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Logging" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/Logging" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="LoggingInput" type="LoggingInput"/>
+   <xs:complexType name="LoggingInput">
+      <xs:sequence>
+         <xs:element name="cDate" type="xs:date" nillable="true"/>
+         <xs:element name="cBy" type="xs:string" nillable="true"/>
+         <xs:element name="category" type="xs:string" nillable="true"/>
+         <xs:element name="message" type="xs:string" nillable="true"/>
+         <xs:element name="sessionId" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

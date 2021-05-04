@@ -1,0 +1,32 @@
+<wsdl:definitions
+     name="secKey"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/secKey"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/secKey"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="secKey_plt" >
+    <plt:role name="secKey_role" >
+      <plt:portType name="tns:secKey_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/secKey" schemaLocation="secKey_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="secKeySelect_inputParameters">
+        <wsdl:part name="secKeySelect_inputParameters" element="top:secKeySelect_ciCode_caCodeInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="AuthCollection_msg">
+        <wsdl:part name="AuthCollection" element="top:AuthCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="secKey_ptt">
+        <wsdl:operation name="secKeySelect">
+            <wsdl:input message="tns:secKeySelect_inputParameters"/>
+            <wsdl:output message="tns:AuthCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

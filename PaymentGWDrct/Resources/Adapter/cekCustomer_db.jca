@@ -1,0 +1,11 @@
+<adapter-config name="cekCustomer" adapter="db" wsdlLocation="cekCustomer.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="cekCustomer_ptt" operation="cekCustomer">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select * from PGN_RW.PE_CUSTOMER_V where cust_number = #cusNumber"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,11 @@
+<adapter-config name="updateInvoice" adapter="db" wsdlLocation="updateInvoice.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="updateInvoice_ptt" operation="updateInvoice">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="update PGN_RW.PE_OP_INVOICE  set PAY_STATUS = #payStatus  where cust_number = #custNumber"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

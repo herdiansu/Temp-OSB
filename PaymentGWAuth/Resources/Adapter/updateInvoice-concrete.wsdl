@@ -1,0 +1,12 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWAuth/updateInvoice" name="updateInvoice-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="updateInvoice.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWAuth/updateInvoice"/>
+    <wsdl:binding name="updateInvoice_ptt-binding" type="upd:updateInvoice_ptt" xmlns:upd="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWAuth/updateInvoice">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="updateInvoice">
+            <soap:operation soapAction="updateInvoice"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

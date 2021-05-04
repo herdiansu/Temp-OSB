@@ -1,0 +1,11 @@
+<adapter-config name="selectPayment" adapter="db" wsdlLocation="selectPayment.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="crm" location="eis/DB/crm"/>
+  <endpoint-interaction portType="selectPayment_ptt" operation="selectPayment">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select * from PGN_RW.PE_OP_PAYMENT where cust_number =#cusNumber"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,14 @@
+<adapter-config name="dbAuth" adapter="db" wsdlLocation="dbAuth.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="pgnmid_ds" location="eis/DB/pgnmid_ds"/>
+  <endpoint-interaction portType="dbAuth_ptt" operation="dbAuthSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="dbAuth.Auth"/>
+      <property name="QueryName" value="dbAuthSelect"/>
+      <property name="MappingsMetaDataURL" value="dbAuth-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

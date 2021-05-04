@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:BondIBPAPrice xmlns:p="http://www.kpei.co.id/BondPrice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.kpei.co.id/BondPrice file:/D:/Project/PGN/Development/Temp-OSB/BondPriceGateway/Resources/Schemas/BondPrice.xsd ">
+  <p:BondIBPAPriceReqResult>
+    <p:header id="">
+      <p:asAt>2001-12-31T12:00:00</p:asAt>
+      <p:source>p:source</p:source>
+    </p:header>
+    <p:body>
+      <p:BondPriceItemIBPA>
+        <p:PriceId>p:PriceId</p:PriceId>
+        <p:PriceDate>2001-01-01</p:PriceDate>
+        <p:BondCode>p:BondCode</p:BondCode>
+        <p:PriceSource>p:PriceSource</p:PriceSource>
+        <p:Yield>0.0</p:Yield>
+        <p:Price>0.0</p:Price>
+        <p:Time>0</p:Time>
+        <p:BondType>p:BondType</p:BondType>
+        <p:LowPrice>0.0</p:LowPrice>
+        <p:HighPrice>0.0</p:HighPrice>
+      </p:BondPriceItemIBPA>
+    </p:body>
+    <p:ext/>
+  </p:BondIBPAPriceReqResult>
+</p:BondIBPAPrice>

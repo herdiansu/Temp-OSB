@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://middleware.pgn.co.id/paymentgw/resPayment"
+            targetNamespace="http://middleware.pgn.co.id/paymentgw/resPayment" elementFormDefault="qualified"
+    xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+    <xsd:annotation
+        xmlns="">
+        <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+        <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+    </xsd:annotation>
+    <xsd:element name="response">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="responseCode"/>
+                <xsd:element name="responseMessage"/>
+                <xsd:element name="data">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="NO_PELANGGAN" type="xsd:integer"/>
+                            <xsd:element name="NAMA_PELANGGAN" type="xsd:string"/>
+                            <xsd:element name="NILAI_TAGIHAN" type="xsd:integer"/>
+                            <xsd:element name="MATA_UANG" type="xsd:string"/>
+                            <xsd:element name="VOLUME_PEMAKAIAN" type="xsd:integer"/>
+                            <xsd:element name="JENIS_PELANGGAN" type="xsd:string"/>
+                            <xsd:element name="JUMLAH_BULAN_TAGIHAN" type="xsd:integer"/>
+                            <xsd:element name="BULAN_TAGIHAN" type="xsd:integer"/>
+                            <xsd:element name="BILLING_CYCLE" type="xsd:integer"/>
+                            <xsd:element name="BILL_REFERENCE" type="xsd:integer"/>
+                            <xsd:element name="STATUS_PROSES" type="xsd:integer"/>
+                            <xsd:element name="TANGGAL_PROSES" type="xsd:string"/>
+                            <xsd:element name="NILAI_PEMBAYARAN" type="xsd:integer"/>
+                            <xsd:element name="NO_RESI" type="xsd:integer"/>
+                            <xsd:element name="STAN" type="xsd:integer"/>
+                            <xsd:element name="TRANS_DATE" type="xsd:string"/>
+                            <xsd:element name="CA_CODE" type="xsd:integer"/>
+                            <xsd:element name="CHANNEL_ID" type="xsd:integer"/>
+                            <xsd:element name="TERMINAL_ID" type="xsd:integer"/>
+                            <xsd:element name="UPDATED_DATE" type="xsd:string"/>
+                            <xsd:element name="STAND_AWAL" type="xsd:integer"/>
+                            <xsd:element name="STAND_AKHIR" type="xsd:integer"/>
+                            <xsd:element name="SESSION_ID" type="xsd:integer"/>
+                            <xsd:element name="PAY_STATUS" type="xsd:integer"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

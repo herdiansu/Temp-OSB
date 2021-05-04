@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/UtilAuthentication/dbAuth" name="dbAuth-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="dbAuth.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/UtilAuthentication/dbAuth"/>
+    <wsdl:binding name="dbAuth_ptt-binding" type="dba:dbAuth_ptt" xmlns:dba="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/UtilAuthentication/dbAuth">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="dbAuthSelect">
+            <soap:operation soapAction="dbAuthSelect"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,24 @@
+<wsdl:definitions name="getInvoice" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/getInvoice" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/getInvoice" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="getInvoice_plt">
+    <plt:role name="getInvoice_role">
+      <plt:portType name="tns:getInvoice_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getInvoice" schemaLocation="getInvoice.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="getInvoiceInput_msg">
+        <wsdl:part name="getInvoiceInput_msg" element="db:getInvoiceInput"/>
+    </wsdl:message>
+    <wsdl:message name="getInvoiceOutputCollection_msg">
+        <wsdl:part name="getInvoiceOutputCollection" element="db:getInvoiceOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="getInvoice_ptt">
+        <wsdl:operation name="getInvoice">
+            <wsdl:input message="tns:getInvoiceInput_msg"/>
+            <wsdl:output message="tns:getInvoiceOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

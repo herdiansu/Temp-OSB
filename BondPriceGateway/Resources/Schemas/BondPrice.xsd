@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kpei.co.id/BondPrice"
+            targetNamespace="http://www.kpei.co.id/BondPrice" elementFormDefault="qualified">
+ <xsd:element name="BondPriceRequest" type="reqData"/>
+ <xsd:element name="BondIDXPriceRequest" type="reqData"/>
+ <xsd:element name="BondIBPAPrice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="BondIBPAPriceReqResult" maxOccurs="1" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="header" maxOccurs="1" minOccurs="0" type="Header"/>
+							<xsd:element name="body" maxOccurs="1" minOccurs="0" type="ArrayOfBondPriceItemIBPA"/>
+							<xsd:element name="ext" maxOccurs="1" minOccurs="0" type="ArrayOfExtensionValue"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="BondIDXPrice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="BondIDXPriceReqResult" maxOccurs="1" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="header" maxOccurs="1" minOccurs="0" type="Header"/>
+							<xsd:element name="body" maxOccurs="1" minOccurs="0" type="ArrayOfBondPriceItemIDX"/>
+							<xsd:element name="ext" maxOccurs="1" minOccurs="0" type="ArrayOfExtensionValue"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+ <xsd:complexType name="Header">
+		<xsd:sequence>
+			<xsd:element name="asAt" maxOccurs="1" minOccurs="1" type="xsd:dateTime"/>
+			<xsd:element name="source" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfExtensionValue">
+		<xsd:sequence>
+			<xsd:element name="value" maxOccurs="unbounded" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+					<xsd:attribute name="id" type="xsd:string"/>
+					</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfBondPriceItemIBPA">
+		<xsd:sequence>
+			<xsd:element name="BondPriceItemIBPA" maxOccurs="unbounded" minOccurs="0" type="BondPriceItemIBPA"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfBondPriceItemIDX">
+		<xsd:sequence>
+			<xsd:element name="BondPriceItemIDX" maxOccurs="unbounded" minOccurs="0" type="BondPriceItemIDX"/>
+		</xsd:sequence>
+	</xsd:complexType>
+  
+ 	<xsd:complexType name="BondPriceItemIBPA">
+		<xsd:sequence>
+			<xsd:element name="PriceId" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="PriceDate" maxOccurs="1" minOccurs="1" type="xsd:date"/>
+			<xsd:element name="BondCode" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="PriceSource" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="Yield" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="Price" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="Time" maxOccurs="1" minOccurs="1" type="xsd:int"/>
+			<xsd:element name="BondType" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="LowPrice" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="HighPrice" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="BondPriceItemIDX">
+		<xsd:sequence>
+			<xsd:element name="PriceId" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="PriceDate" maxOccurs="1" minOccurs="1" type="xsd:date"/>
+			<xsd:element name="BondCode" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="PriceSource" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="Yield" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="Price" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="Time" maxOccurs="1" minOccurs="1" type="xsd:int"/>
+			<xsd:element name="BondType" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="LowPrice" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+			<xsd:element name="HighPrice" maxOccurs="1" minOccurs="1" type="xsd:decimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+ <xsd:complexType name="reqData">
+  <xsd:sequence>
+   <xsd:element name="body">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="filter">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="stringList" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dateTimeEqual" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="dateTimeRange" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="start" type="xsd:string"/>
+                          <xsd:element name="end" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dateTimeNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="stringNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="decimalList" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="decimalNotEqual" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="value" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="stringEqual" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="decimalEqual" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="decimalRange" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="start" type="xsd:string"/>
+                          <xsd:element name="end" type="xsd:string"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="operand" type="xsd:string" minOccurs="0"/>
+                  </xsd:sequence>
+                  <xsd:attribute name="id" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+   <xsd:element name="ext" type="expandableVariable"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="expandableVariable">
+    <xsd:annotation>
+      <xsd:documentation>Array of variable for extending parameters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="value" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>value of parameter</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="id" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>name of parameter</xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

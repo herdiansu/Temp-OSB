@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/cekCustomer" name="cekCustomer-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="cekCustomer.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/cekCustomer"/>
+    <wsdl:binding name="cekCustomer_ptt-binding" type="cek:cekCustomer_ptt" xmlns:cek="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/cekCustomer">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="cekCustomer">
+            <soap:operation soapAction="cekCustomer"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:composite xmlns:ns="http://xmlns.oracle.com/sca/1.0">
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/secKey"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/getInvoice"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/dbLogging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/selectPayment"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/serviceStatus"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/sessionInLogging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/Logging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/collectingAgent"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/updateInvoice"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/updatePayment"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/cekCustomer"/>
+    </ns:reference>
+</ns:composite>

@@ -1,0 +1,59 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="BondPrice"
+     targetNamespace="http://www.kpei.co.id/BondPrice"
+     xmlns:tns="http://www.kpei.co.id/BondPrice"
+     xmlns:inp1="http://www.kpei.co.id/BondPrice"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.kpei.co.id/BondPrice" schemaLocation="../Schemas/BondPrice.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="BondPriceRequestMessage">
+        <wsdl:part name="BondPriceRequest" element="tns:BondPriceRequest"/>
+    </wsdl:message>
+    <wsdl:message name="BondPriceReplyMessage">
+        <wsdl:part name="BondPriceResponse" element="tns:BondIBPAPrice"/>
+    </wsdl:message>
+    <wsdl:portType name="BondPrice_ptt">
+        <wsdl:operation name="BondPrice">
+            <wsdl:input message="tns:BondPriceRequestMessage"/>
+            <wsdl:output message="tns:BondPriceReplyMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="BondIDXPrice">
+            <wsdl:input message="tns:BondIDXPriceRequestMessage"/>
+            <wsdl:output message="tns:BondIDXPriceReplyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BondPrice_bind" type="tns:BondPrice_ptt">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="BondPrice">
+            <soap:operation style="document" soapAction="BondPrice"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://www.kpei.co.id/BondPrice"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://www.kpei.co.id/BondPrice"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BondIDXPrice">
+            <soap:operation soapAction="BondPrice"/>
+            <wsdl:input>
+                <soap:body namespace="http://www.kpei.co.id/BondPrice"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body namespace="http://www.kpei.co.id/BondPrice"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="BondIDXPriceRequestMessage">
+        <wsdl:part name="BondIDXPriceRequest" element="tns:BondPriceRequest"/>
+    </wsdl:message>
+    <wsdl:message name="BondIDXPriceReplyMessage">
+        <wsdl:part name="BondIDXPriceResponse" element="tns:BondIDXPrice"/>
+    </wsdl:message>
+</wsdl:definitions>

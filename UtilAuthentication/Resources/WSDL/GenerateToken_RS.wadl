@@ -1,0 +1,20 @@
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inp1="http://common.middleware.com" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="GenerateToken_RS">RestService</doc>
+   <grammars>
+      <xsd:schema xmlns:tns="http://xmlns.oracle.com/Temporarry/UtilAuthentication/GeneratetToken" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <xsd:import namespace="http://common.middleware.com" schemaLocation="../Schemas/Auth.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="POST" soa:wsdlOperation="execute">
+            <request>
+               <representation mediaType="application/json" element="cns:requestMessage" xmlns:cns="http://common.middleware.com"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:responseMessage" xmlns:cns="http://common.middleware.com"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

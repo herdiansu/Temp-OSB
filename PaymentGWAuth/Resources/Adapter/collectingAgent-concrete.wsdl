@@ -1,0 +1,15 @@
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/collectingAgent" name="collectingAgent-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:import location="collectingAgent.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/collectingAgent"/>
+    <wsdl:binding name="collectingAgent_ptt-binding" type="col:collectingAgent_ptt" xmlns:col="http://xmlns.oracle.com/pcbpel/adapter/db/Temporarry/PaymentGWAuth/collectingAgent">
+        <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+        <wsdl:operation name="collectingAgent">
+            <soap:operation soapAction="collectingAgent"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

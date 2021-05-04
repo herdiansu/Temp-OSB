@@ -1,0 +1,24 @@
+<wsdl:definitions name="sessionInLogging" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/sessionInLogging" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/sessionInLogging" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sessionInLogging" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="sessionInLogging_plt">
+    <plt:role name="sessionInLogging_role">
+      <plt:portType name="tns:sessionInLogging_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sessionInLogging" schemaLocation="sessionInLogging.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="sessionInLoggingInput_msg">
+        <wsdl:part name="sessionInLoggingInput_msg" element="db:sessionInLoggingInput"/>
+    </wsdl:message>
+    <wsdl:message name="sessionInLoggingOutputCollection_msg">
+        <wsdl:part name="sessionInLoggingOutputCollection" element="db:sessionInLoggingOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="sessionInLogging_ptt">
+        <wsdl:operation name="sessionInLogging">
+            <wsdl:input message="tns:sessionInLoggingInput_msg"/>
+            <wsdl:output message="tns:sessionInLoggingOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

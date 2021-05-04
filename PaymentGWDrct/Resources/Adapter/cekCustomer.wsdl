@@ -1,0 +1,24 @@
+<wsdl:definitions name="cekCustomer" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/cekCustomer" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Temp-OSB/PaymentGWDrct/cekCustomer" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="cekCustomer_plt">
+    <plt:role name="cekCustomer_role">
+      <plt:portType name="tns:cekCustomer_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/cekCustomer" schemaLocation="cekCustomer.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="cekCustomerInput_msg">
+        <wsdl:part name="cekCustomerInput_msg" element="db:cekCustomerInput"/>
+    </wsdl:message>
+    <wsdl:message name="cekCustomerOutputCollection_msg">
+        <wsdl:part name="cekCustomerOutputCollection" element="db:cekCustomerOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="cekCustomer_ptt">
+        <wsdl:operation name="cekCustomer">
+            <wsdl:input message="tns:cekCustomerInput_msg"/>
+            <wsdl:output message="tns:cekCustomerOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

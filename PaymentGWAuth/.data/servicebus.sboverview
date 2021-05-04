@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:composite xmlns:ns="http://xmlns.oracle.com/sca/1.0">
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/secKey"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/updatePayment"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/selectPayment"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/serviceStatus"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/collectingAgent"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/getInvoice"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/Logging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWDrct/BusinessServices/sessionInLogging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/dbLogging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/sessionInLogging"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/cekCustomer"/>
+    </ns:reference>
+    <ns:reference>
+        <ns:interface src="BusinessService:PaymentGWAuth/BusinessServices/updateInvoice"/>
+    </ns:reference>
+</ns:composite>

@@ -1,0 +1,100 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="crm" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="crm" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>192.168.105.39</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1526</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>PGN_RW</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="sid">
+        <Contents>DEVPGN02</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="ebs" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="ebs" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>192.168.105.173</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1525</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>apps</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="sid">
+        <Contents>UAT</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="pgnmid_ds" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="pgnmid_ds"
+             xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>192.100.10.100</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1523</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>PGNMID</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="sid">
+        <Contents>SOA</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="popay_dev" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="popay_dev"
+             xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>192.168.105.39</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1523</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>PGN_PAYON</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="sid">
+        <Contents>ORCL</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+</References>

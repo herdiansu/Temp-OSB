@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/collectingAgent" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="collectingAgentInput" type="collectingAgentInput"/>
+   <xs:complexType name="collectingAgentInput">
+      <xs:sequence>
+         <xs:element name="caCode" type="xs:string" nillable="true"/>
+         <xs:element name="ciCode" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="collectingAgentOutputCollection" type="collectingAgentOutputCollection"/>
+   <xs:complexType name="collectingAgentOutputCollection">
+      <xs:sequence>
+         <xs:element name="collectingAgentOutput" type="collectingAgentOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="collectingAgentOutput">
+      <xs:sequence>
+         <xs:element name="ID" type="xs:decimal" nillable="true"/>
+         <xs:element name="CA_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="CI_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="NAME" type="xs:string" nillable="true"/>
+         <xs:element name="EFF_START_DATE" type="xs:dateTime" nillable="true"/>
+         <xs:element name="EFF_END_DATE" type="xs:dateTime" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
